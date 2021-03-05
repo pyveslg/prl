@@ -13,3 +13,7 @@ batch = [248, 550, 551]
 batch.each do |b|
   GetAlumniJob.perform_now(b)
 end
+
+User.all.each do |u|
+  CreateCommitsJob.perform_now(u)
+end
