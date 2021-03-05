@@ -12,7 +12,7 @@
 
 
   <ul class="commit-listing mt-3">
-    <% @commits.each do |commit| %>
+    <% @commits.sort_by{|commit| commit.votes.sum(:value)}.reverse.each do |commit| %>
       <li>
         <p><%= commit.message %></p>
         <p><%= commit.user.first_name %> <%= commit.user.last_name %></p>
