@@ -10,13 +10,7 @@ CommitsByRepositoryQuery = GithubApi::Client.parse <<-'GRAPHQL'
                 node {
                   id
                   message
-                  author {
-                    name
-                    date
-                    user {
-                      login
-                    }
-                  }
+                  committedDate
                 }
               }
             }
