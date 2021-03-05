@@ -1,6 +1,10 @@
 class CommitsController < ApplicationController
 
   def index
-    @commits = Commit.all
+    if params[:query]
+      @commits = Commit.joins(:user).where(user: {batch: params[:query]})
+    else
+      @commits = Commit.all
+    end
   end
 end
