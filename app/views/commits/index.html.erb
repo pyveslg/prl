@@ -1,1 +1,18 @@
-<h1><%= @commits.count %> <%= "commit".pluralize(@commits.count) %></h1>
+<div class="container">
+  <h1><%= @commits.count %> <%= "commit".pluralize(@commits.count) %></h1>
+
+
+  <ul class="commit-listing">
+    <% @commits.each do |commit| %>
+      <li>
+        <p><%= commit.message %></p>
+        <p><%= commit.user.first_name %> <%= commit.user.last_name %></p>
+      </li>
+    <% end %>
+    <li>
+        <p>Lorem ipsum, dolor, sit amet consectetur adipisicing elit. Harum, illum?</p>
+        <p>Bob Morane</p>
+      </li>
+  </ul>
+
+</div>
