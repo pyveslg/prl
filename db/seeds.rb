@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-batch = 401
+batch = 551
 
 url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}"
 
-cookie = "..."
+cookie = ENV['COOKIE']
 
 response = RestClient.get(url, headers = { cookie: cookie })
 
