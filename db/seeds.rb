@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-batch = 251
+batch = 551
 
 url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}"
 
