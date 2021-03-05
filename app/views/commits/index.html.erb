@@ -2,7 +2,16 @@
   <h1><%= @commits.count %> <%= "commit".pluralize(@commits.count) %></h1>
 
 
-  <ul class="commit-listing">
+  <%= form_tag commits_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      placeholder: "Find a batch"
+    %>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
+
+
+  <ul class="commit-listing mt-3">
     <% @commits.each do |commit| %>
       <li>
         <p><%= commit.message %></p>
