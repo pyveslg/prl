@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-batch = [248, 550, 551]
+batch = [551]
 
 
 batch.each do |b|
