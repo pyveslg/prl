@@ -11,20 +11,5 @@ batch = [248, 550, 551]
 
 
 batch.each do |b|
-  url = "https://kitt.lewagon.com/api/v1/users?search=#{b}"
-
-  cookie = ENV['COOKIE']
-
-  response = RestClient.get(url, headers = { cookie: cookie })
-
-  response =  JSON.parse(response.body)
-  # puts response["page_count"]
-
-  response["users"].each do |user|
-    user_info = user["alumnus"]
-    unless User.find_by(github_username: user_info["github"])
-      u = User.create(email: "lewagonstudent#{user_info["id"]}@gmail.com", password: "123456", first_name: user_info["first_name"], last_name: user_info["last_name"], github_username: user_info["github"], batch: b)
-      puts "#{u.first_name} #{u.last_name} created"
-    end
-  end
+  GetAlumniJob.perform_now(b)
 end
