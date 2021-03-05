@@ -15,6 +15,7 @@ ActiveStorage.start()
 
 
 import "bootstrap";
+import "animate.css";
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
