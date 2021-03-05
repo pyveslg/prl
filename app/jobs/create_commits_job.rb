@@ -7,6 +7,8 @@ class CreateCommitsJob < ApplicationJob
       GithubApi::Discovery.each_commit(login, repo["name"]) do |commit|
         next if Commit.where(github_id: commit["id"]).any?
 
+        puts commit["message"]
+
         Commit.create!(
           user: user,
           github_id: commit["id"],
