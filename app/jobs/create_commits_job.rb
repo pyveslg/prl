@@ -8,6 +8,13 @@ class CreateCommitsJob < ApplicationJob
         next if Commit.where(github_id: commit["id"]).any?
         next if commit["message"].size > 200
         next if commit["message"].include?("Merge")
+        next if commit["message"].include?("Remove")
+        next if commit["message"].include?("Replace")
+        next if commit["message"].include?("Support")
+        next if commit["message"].include?("Add")
+        next if commit["message"].include?("#")
+        next if commit["message"].include?("Refactor")
+        next if commit["message"].include?("Document")
 
         Commit.create!(
           user: user,
