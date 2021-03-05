@@ -1,0 +1,19 @@
+.commit-listing {
+  list-style: none;
+  padding-left: 0;
+  li {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-color: white;
+    padding: 12px;
+    border-radius: 4px;
+    box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.07);
+    p {
+      margin: 0;
+    }
+    p:last-child {
+      border-left: 1px solid #ddd;
+      padding-left: 10px;
+    }
+  }
+}
