@@ -101,9 +101,16 @@ GEM
       sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+<<<<<<< HEAD
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+=======
+    graphql (1.12.5)
+    graphql-client (0.16.0)
+      activesupport (>= 3.0)
+      graphql (~> 1.8)
+>>>>>>> 4828cad... Add GraphQL client
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -254,6 +261,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-darwin-19
   x86_64-darwin-20
   x86_64-linux
 
@@ -265,6 +273,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   font-awesome-sass
+  graphql-client
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
@@ -289,4 +298,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.6
+   2.2.11

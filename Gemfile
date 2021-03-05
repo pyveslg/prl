@@ -32,6 +32,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise'
 
+# Connect to GitHub’s API
+gem 'graphql-client'
+
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
