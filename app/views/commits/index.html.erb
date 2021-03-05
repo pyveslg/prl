@@ -7,12 +7,27 @@
       <li>
         <p><%= commit.message %></p>
         <p><%= commit.user.first_name %> <%= commit.user.last_name %></p>
+        <div class="votes-box">
+          <div class="votes">
+            <i class="fas fa-caret-up upvote"></i>
+            <i class="fas fa-caret-down downvote"></i>
+          </div>
+          <div class="vote-number"><%= commit.votes.count %></div>
+        </div>
       </li>
     <% end %>
+    <!-- Example -->
     <li>
-        <p>Lorem ipsum, dolor, sit amet consectetur adipisicing elit. Harum, illum?</p>
-        <p>Bob Morane</p>
-      </li>
+      <p>Lorem ipsum, dolor, sit amet consectetur adipisicing elit. Harum, illum?</p>
+      <p>Bob Morane</p>
+      <div class="votes-box">
+        <div class="votes">
+          <i class="fas fa-caret-up upvote"></i>
+          <i class="fas fa-caret-down downvote"></i>
+        </div>
+        <div class="vote-number">73</div>
+      </div>
+    </li>
   </ul>
 
 </div>
