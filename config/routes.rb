@@ -7,4 +7,6 @@ Rails.application.routes.draw do
     resources :votes, only: [:create]
     get '/delete_vote', to: 'votes#delete'
   end
+
+  get '/vote', to: 'votes#vote'
 end

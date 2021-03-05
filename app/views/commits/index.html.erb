@@ -18,14 +18,10 @@
         <p><%= commit.user.first_name %> <%= commit.user.last_name %></p>
         <div class="votes-box">
           <div class="votes">
-            <%= link_to create_votes_path(commit) do  %>
-              <i class="fas fa-caret-up upvote"></i>
-            <% end %>
-            <%= link_to commit_delete_vote do  %>
-              <i class="fas fa-caret-down downvote"></i>
-            <% end %>
+            <i class="fas fa-caret-up upvote vote" data-commit_id="<%= commit.id %>" data-value='1'></i>
+            <i class="fas fa-caret-down downvote vote" data-commit_id="<%= commit.id %>" data-value='-1'></i>
           </div>
-          <div class="vote-number"><%= commit.votes.count %></div>
+          <div class="vote-number" id="commit-<%= commit.id %>"><%= commit.votes.sum(:value) %></div>
         </div>
       </li>
     <% end %>
