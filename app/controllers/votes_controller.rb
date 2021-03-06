@@ -17,11 +17,15 @@ class VotesController < ApplicationController
   def vote
     commit = Commit.find(params[:commit_id])
     # Vote.find_or_create_by(commit: commit, value: params[:vote].to_i, session_id: session.id.to_s)
-    vote_params = {commit: commit, value: params[:vote].to_i, session_id: session.id.to_s}
-    novote = Vote.find_by(vote_params).nil?
+    vote_params = {commit: commit, value: params[:value].to_i, session_id: session.id.to_s}
     Vote.where(vote_params.except(:value)).destroy_all
-    Vote.create(vote_params) if novote
-    render json: commit.votes.sum(:value)
+    Vote.create(vote_params) unless params[:value] == '0'
+    # render json: commit.votes.sum(:value)
+    render json: {
+       votes: commit.votes.sum(:value),
+       content: (render_to_string partial: "shared/vote", locals: {commit: commit}, layout: false )
+     }
+    # rendre une partial pour le vote en question
   end
 
 end
