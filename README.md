@@ -17,3 +17,10 @@ Créer un fichier `.env` à la racine contenant les lignes suivantes:
   publiques.
 
 Enfin, lancer `bin/setup`.
+
+## Déploiement
+
+```sh
+$ git push heroku master
+$ heroku run rails db:migrate db:seed:replant DISABLE_DATABASE_DATABASE_ENVIRONMENT_CHECK=1
+```
