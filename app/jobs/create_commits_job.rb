@@ -4,7 +4,7 @@ class CreateCommitsJob < ApplicationJob
   def perform(user)
     @user = user
     login = user.github_username
-
+    sleep(6)
     url = "http://api.github.com/search/commits?page=1&per_page=100&q=author:#{login}"
 
     response = RestClient.get(url, headers = { "Accept" => "application/vnd.github.cloak-preview" })
@@ -22,13 +22,11 @@ class CreateCommitsJob < ApplicationJob
 
 
     (2..total_commits.fdiv(100).ceil).to_a.each do |page|
-      sleep(5)
+      sleep(6)
       url = "http://api.github.com/search/commits?page=#{page}&per_page=100&q=author:#{login}"
 
       response = RestClient.get(url, headers = { "Accept" => "application/vnd.github.cloak-preview" })
       response =  JSON.parse(response.body)
-
-      puts response['items'].size
 
       create_commits_from(response['items'])
     end
