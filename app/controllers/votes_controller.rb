@@ -16,7 +16,11 @@ class VotesController < ApplicationController
 
   def vote
     commit = Commit.find(params[:commit_id])
-    Vote.create(commit: commit, value: params[:vote].to_i)
+    # Vote.find_or_create_by(commit: commit, value: params[:vote].to_i, session_id: session.id.to_s)
+    vote_params = {commit: commit, value: params[:vote].to_i, session_id: session.id.to_s}
+    novote = Vote.find_by(vote_params).nil?
+    Vote.where(vote_params.except(:value)).destroy_all
+    Vote.create(vote_params) if novote
     render json: commit.votes.sum(:value)
   end
 
