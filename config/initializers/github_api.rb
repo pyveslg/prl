@@ -2,8 +2,6 @@ require "graphql/client"
 require "graphql/client/http"
 
 module GithubApi
-  # On GitHub, go to Settings > Developer Settings > Create Personal access token
-  # No need for checking any private information.
   GITHUB_ACCESS_TOKEN = ENV.fetch("GITHUB_ACCESS_TOKEN")
   URL = "https://api.github.com/graphql"
 
