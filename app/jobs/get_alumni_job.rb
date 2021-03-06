@@ -4,7 +4,7 @@ class GetAlumniJob < ApplicationJob
   def perform(batch)
     url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}"
 
-    cookie = ENV['COOKIE']
+    cookie = ENV.fetch("COOKIE")
 
     response = RestClient.get(url, headers = { cookie: cookie })
 
