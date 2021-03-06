@@ -7,13 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-batch = [248, 550, 551]
+batch = [551]
 
 
 batch.each do |b|
   GetAlumniJob.perform_now(b)
 end
 
-User.all.each do |u|
+User.all.find_each do |u|
   CreateCommitsJob.perform_now(u)
 end
