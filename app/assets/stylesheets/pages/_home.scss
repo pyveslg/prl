@@ -2,11 +2,15 @@
 .pages-home {
   margin-top: 100px;
   text-align: center;
+
   .logo {
     width: 250px;
   }
-  h1 {
+
+  h1 a {
     font-size: 100px;
     font-weight: bold;
+    color: inherit;
+    text-decoration: none;
   }
 }
