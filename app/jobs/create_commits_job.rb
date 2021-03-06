@@ -4,7 +4,14 @@ class CreateCommitsJob < ApplicationJob
   def perform(user)
     login = user.github_username
     GithubApi::Discovery.each_repository(login) do |repo|
-      GithubApi::Discovery.each_commit(login, repo["name"]) do |commit|
+      repo_name = repo["name"]
+
+      repository = Repository.find_or_create_by!(
+        name: repo_name,
+        github_username: login,
+      )
+
+      GithubApi::Discovery.each_commit(login, repo_name) do |commit|
         hash = commit["id"]
         next if Commit.where(github_id: hash).any?
 
@@ -13,13 +20,14 @@ class CreateCommitsJob < ApplicationJob
         next if author.nil?
 
         message = commit["message"].lines.first.strip
-        puts "#{author}: “#{message}”"
+        puts "#{repository.full_name} @#{author_login} “#{message}”"
 
         Commit.create!(
           user: author,
           github_id: hash,
           message: commit["message"].lines.first,
           message_date: commit["committedDate"],
+          repository: repository,
         )
       end
     end
