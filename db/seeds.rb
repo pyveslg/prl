@@ -9,11 +9,17 @@
 
 batch = [551]
 
-
 batch.each do |b|
+  puts "------> Creating alumni for batch #{b}…"
   GetAlumniJob.perform_now(b)
 end
 
-User.all.find_each do |u|
-  CreateCommitsJob.perform_now(u)
+User.find_each do |u|
+  puts "------> Creating repositories for #{u.full_name}…"
+  CreateRepositoriesJob.perform_now(u)
+end
+
+Repository.find_each do |r|
+  puts "------> Creating commits for #{r.full_name}…"
+  CreateCommitsJob.perform_now(r)
 end
