@@ -6,5 +6,7 @@ class CommitsController < ApplicationController
     else
       @commits = Commit.by_random.first(100)
     end
+
+    @commits = @commits.sort_by { |commit| commit.score }.reverse
   end
 end

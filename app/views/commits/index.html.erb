@@ -12,16 +12,28 @@
 
 
   <ul class="commit-listing mt-3">
-    <% @commits.sort_by{|commit| commit.votes.sum(:value)}.reverse.each do |commit| %>
+    <% @commits.each do |commit| %>
       <li>
         <p><%= commit.message %></p>
         <p><%= commit.user.first_name %> <%= commit.user.last_name %></p>
         <div class="votes-box">
           <div class="votes">
-            <i class="fas fa-caret-up upvote vote" data-commit_id="<%= commit.id %>" data-value='1'></i>
-            <i class="fas fa-caret-down downvote vote" data-commit_id="<%= commit.id %>" data-value='-1'></i>
+            <i
+              class="fas fa-caret-up upvote vote"
+              data-commit-id="<%= commit.id %>"
+              data-value="1"
+              title="Upvote"
+            ></i>
+            <i
+              class="fas fa-caret-down downvote vote"
+              data-commit-id="<%= commit.id %>"
+              data-value="-1"
+              title="Downvote"
+            ></i>
           </div>
-          <div class="vote-number" id="commit-<%= commit.id %>"><%= commit.votes.sum(:value) %></div>
+          <div class="vote-number" id="commit-<%= commit.id %>">
+            <%= commit.score %>
+          </div>
         </div>
       </li>
     <% end %>
