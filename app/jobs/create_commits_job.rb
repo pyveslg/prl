@@ -2,27 +2,54 @@ class CreateCommitsJob < ApplicationJob
   queue_as :default
 
   def perform(user)
+    @user = user
     login = user.github_username
-    GithubApi::Discovery.each_repository(login) do |repo|
-      GithubApi::Discovery.each_commit(login, repo["name"]) do |commit|
-        next if Commit.where(github_id: commit["id"]).any?
-        next if commit["message"].size > 200
-        next if commit["message"].include?("Merge")
-        next if commit["message"].include?("Remove")
-        next if commit["message"].include?("Replace")
-        next if commit["message"].include?("Support")
-        next if commit["message"].include?("Add")
-        next if commit["message"].include?("#")
-        next if commit["message"].include?("Refactor")
-        next if commit["message"].include?("Document")
 
-        Commit.create!(
-          user: user,
-          github_id: commit["id"],
-          message: commit["message"],
-          message_date: commit["committedDate"],
-        )
-      end
+    url = "http://api.github.com/search/commits?page=1&per_page=100&q=author:#{login}"
+
+    response = RestClient.get(url, headers = { "Accept" => "application/vnd.github.cloak-preview" })
+    response =  JSON.parse(response.body)
+
+    total_commits = response["total_count"]
+
+    response['items'].each do |item|
+      next if item['committer']['email'] == "noreply@github.com"
+      user.update(email: item['commit']['committer']['email'])
+      break
+    end
+
+    create_commits_from(response['items'])
+
+
+    (2..total_commits.fdiv(100).ceil).to_a.each do |page|
+      sleep(5)
+      url = "http://api.github.com/search/commits?page=#{page}&per_page=100&q=author:#{login}"
+
+      response = RestClient.get(url, headers = { "Accept" => "application/vnd.github.cloak-preview" })
+      response =  JSON.parse(response.body)
+
+      puts response['items'].size
+
+      create_commits_from(response['items'])
+    end
+
+
+    puts 'done'
+
+  end
+
+  def create_commits_from(items)
+    items.each do |item|
+      commit = item['commit']
+      next if Commit.find_by(github_id: item["node_id"])
+      next if commit['committer']['email'] == "noreply@github.com"
+      puts commit['message']
+      Commit.create!(
+        user: @user,
+        github_id: item["node_id"],
+        message: commit["message"],
+        message_date: commit["author"]["date"]
+      )
     end
   end
 end
