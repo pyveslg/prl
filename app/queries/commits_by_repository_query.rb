@@ -4,13 +4,18 @@ CommitsByRepositoryQuery = GithubApi::Client.parse <<-'GRAPHQL'
       defaultBranchRef {
         target {
           ... on Commit {
-            history(first: 5, after: $cursor) {
+            history(first: 100, after: $cursor) {
               edges {
                 cursor
                 node {
                   id
                   message
                   committedDate
+                  author {
+                    user {
+                      login
+                    }
+                  }
                 }
               }
             }

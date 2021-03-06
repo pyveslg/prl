@@ -14,6 +14,6 @@ batch.each do |b|
   GetAlumniJob.perform_now(b)
 end
 
-User.all.each do |u|
+User.all.find_each do |u|
   CreateCommitsJob.perform_now(u)
 end

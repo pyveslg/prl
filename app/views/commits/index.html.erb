@@ -14,7 +14,7 @@
   <ul class="commit-listing mt-3">
     <% @commits.sort_by{|commit| commit.votes.sum(:value)}.reverse.each do |commit| %>
       <li>
-        <p><%= commit.message.lines.first %></p>
+        <p><%= commit.message %></p>
         <p><%= commit.user.first_name %> <%= commit.user.last_name %></p>
         <div class="votes-box">
           <div class="votes">

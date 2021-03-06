@@ -5,21 +5,20 @@ class CreateCommitsJob < ApplicationJob
     login = user.github_username
     GithubApi::Discovery.each_repository(login) do |repo|
       GithubApi::Discovery.each_commit(login, repo["name"]) do |commit|
-        next if Commit.where(github_id: commit["id"]).any?
-        next if commit["message"].size > 200
-        next if commit["message"].include?("Merge")
-        next if commit["message"].include?("Remove")
-        next if commit["message"].include?("Replace")
-        next if commit["message"].include?("Support")
-        next if commit["message"].include?("Add")
-        next if commit["message"].include?("#")
-        next if commit["message"].include?("Refactor")
-        next if commit["message"].include?("Document")
+        hash = commit["id"]
+        next if Commit.where(github_id: hash).any?
+
+        author_login = commit.dig("author", "user", "login")
+        author = User.find_by(github_username: author_login)
+        next if author.nil?
+
+        message = commit["message"].lines.first.strip
+        puts "#{author}: “#{message}”"
 
         Commit.create!(
-          user: user,
-          github_id: commit["id"],
-          message: commit["message"],
+          user: author,
+          github_id: hash,
+          message: commit["message"].lines.first,
           message_date: commit["committedDate"],
         )
       end
