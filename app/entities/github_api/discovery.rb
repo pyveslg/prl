@@ -20,5 +20,7 @@ module GithubApi::Discovery
     edges.each { |edge| block.call(edge["node"]) }
 
     each_commit(username, repository, edges.last["cursor"], &block)
+
+    sleep 3
   end
 end
