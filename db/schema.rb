@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_082516) do
     t.date "message_date"
     t.string "github_id"
     t.bigint "repository_id"
+    t.integer "score", default: 0, null: false
     t.index ["github_id"], name: "index_commits_on_github_id"
     t.index ["repository_id"], name: "index_commits_on_repository_id"
     t.index ["user_id"], name: "index_commits_on_user_id"
