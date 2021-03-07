@@ -17,9 +17,9 @@ class VotesController < ApplicationController
   def vote
     commit = Commit.find(params[:commit_id])
     # Vote.find_or_create_by(commit: commit, value: params[:vote].to_i, session_id: session.id.to_s)
-    vote_params = {commit: commit, value: params[:value].to_i, session_id: session.id.to_s}
-    Vote.where(vote_params.except(:value)).destroy_all
-    Vote.create(vote_params) unless params[:value] == '0'
+    votes = Vote.where(commit: commit, session_id: session.id)
+    votes.destroy_all
+    votes.create!(value: params[:value]) unless params[:value] == "0"
     # render json: commit.votes.sum(:value)
     render json: {
        votes: commit.votes.sum(:value),
