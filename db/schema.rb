@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_135102) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "value"
+    t.string "session_id"
     t.index ["commit_id"], name: "index_votes_on_commit_id"
   end
 
