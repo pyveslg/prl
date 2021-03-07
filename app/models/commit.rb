@@ -13,10 +13,4 @@ class Commit < ApplicationRecord
   def voted_by?(session_id)
     downvoted_by?(session_id) || upvoted_by?(session_id)
   end
-
-  def vote_by?(session_id)
-    'downvote' if downvoted_by?(session_id)
-    'upvote' if upvoted_by?(session_id)
-    'novote' unless voted_by?(session_id)
-  end
 end
