@@ -26,7 +26,15 @@
         <p><%= commit.user.full_name %></p>
         <div class="votes-box">
           <div class="votes">
-            <%= render partial: "shared/vote", locals: { commit: commit } %>
+            <%=
+              render(
+                partial: "shared/vote",
+                locals: {
+                  commit: commit,
+                  vote: @session_votes_by_commit[commit.id],
+                }
+              )
+            %>
           </div>
           <div class="vote-number" id="commit-<%= commit.id %>">
             <%= commit.score %>
