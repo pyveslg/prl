@@ -2,9 +2,19 @@
   <h1><%= pluralize @total_count, "commit" %></h1>
 
   <%= form_tag commits_path, method: :get do %>
-    <%= text_field_tag :query,
-      params[:query],
-      placeholder: "Find a batch"
+    <%=
+      select_tag(
+        :batch,
+        options_for_select(@batches, params[:batch]),
+        prompt: "Batch number…",
+      )
+    %>
+    <%=
+      select_tag(
+        :username,
+        options_for_select(@usernames, params[:username]),
+        prompt: "User…",
+      )
     %>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
@@ -14,7 +24,7 @@
     <% @commits.sort_by{|commit| commit.votes.sum(:value)}.reverse.each do |commit| %>
       <li>
         <p><%= commit.message %></p>
-        <p><%= commit.user.first_name %> <%= commit.user.last_name %></p>
+        <p><%= commit.user.full_name %></p>
         <div class="votes-box">
           <div class="votes">
             <i class="fas fa-caret-up upvote vote" data-commit_id="<%= commit.id %>" data-value='1'></i>
