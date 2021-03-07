@@ -14,8 +14,9 @@ class CreateCommitsJob < ApplicationJob
       next if author.nil?
 
       message = commit["message"].lines.first.strip
-      puts "#{repository.full_name} @#{author_login} “#{message}”"
+      next if message =~ /^Merge/
 
+      puts "#{repository.full_name}: <#{author_login}> #{message}"
       Commit.create!(
         user: author,
         github_id: hash,
