@@ -1,12 +1,14 @@
+<% vote = commit.vote_by(session.id.to_s) %>
+
 <i
-  class="fas fa-caret-up vote <%= 'green' if commit.upvoted_by?(session.id.to_s) %>"
+  class="fas fa-caret-up vote <%= 'green' if vote == 'upvote' %>"
   data-commit_id="<%= commit.id %>"
   data-vote="upvote"
-  data-value="<%= commit.voted_by?(session.id.to_s) ? 0 : 1 %>"
+  data-value="<%= vote ? 0 : 1 %>"
 ></i>
 <i
-  class="fas fa-caret-down vote <%= 'red' if commit.downvoted_by?(session.id.to_s) %>"
+  class="fas fa-caret-down vote <%= 'red' if vote == 'downvote' %>"
   data-commit_id="<%= commit.id %>"
   data-vote="downvote"
-  data-value="<%= commit.voted_by?(session.id.to_s) ? 0 : -1 %>"
+  data-value="<%= vote ? 0 : -1 %>"
 ></i>
