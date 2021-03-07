@@ -24,5 +24,5 @@ Enfin, lancer `bin/setup`.
 
 ```sh
 $ git push heroku master
-$ heroku run rails db:migrate db:seed:replant DISABLE_DATABASE_DATABASE_ENVIRONMENT_CHECK=1
+$ heroku run rails db:migrate db:seed
 ```
