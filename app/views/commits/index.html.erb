@@ -1,6 +1,5 @@
 <div class="container">
-  <h1><%= @commits.count %> <%= "commit".pluralize(@commits.count) %></h1>
-
+  <h1><%= pluralize @total_count, "commit" %></h1>
 
   <%= form_tag commits_path, method: :get do %>
     <%=

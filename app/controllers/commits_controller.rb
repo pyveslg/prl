@@ -1,6 +1,7 @@
 class CommitsController < ApplicationController
 
   def index
+    @total_count = Commit.count
     @commits = filtered_commits
     @batches = User.distinct.pluck(:batch).compact
     @usernames = User.order(:first_name, :last_name).map do |user|
