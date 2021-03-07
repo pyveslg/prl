@@ -1,11 +1,20 @@
 class VotesController < ApplicationController
   def vote
     commit = Commit.find(params[:commit_id])
-    Vote.create(commit: commit, value: params[:vote].to_i)
 
-    score = commit.votes.sum(:value)
-    commit.update!(score: score)
+    votes = Vote.where(commit: commit, session_id: session.id.to_s)
+    votes.destroy_all
+    votes.create!(value: params[:value]) unless params[:value] == "0"
 
-    render json: score
+    commit.update_column(:score, commit.votes.sum(:value))
+
+    render json: {
+       votes: commit.score,
+       content: render_to_string(
+         partial: "shared/vote",
+         locals: { commit: commit },
+         layout: false,
+       )
+     }
   end
 end
