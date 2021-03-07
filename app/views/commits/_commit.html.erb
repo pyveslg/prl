@@ -1,0 +1,31 @@
+<li id="<%= dom_id(commit) %>">
+  <p><%= commit.message %></p>
+  <p><%= commit.user.full_name %></p>
+
+  <div class="votes-box">
+    <div class="votes">
+      <%= form_with(model: Vote.new) do |f| %>
+        <%= f.hidden_field :value, value: vote ? 0 : 1 %>
+        <%= f.hidden_field :commit_id, value: commit.id %>
+        <button type="submit" class="btn btn-light btn-sm" title="Upvote">
+          <i
+            class="fas fa-caret-up vote upvote <%= 'green' if vote&.value == 1 %>"
+          ></i>
+        </button>
+      <% end %>
+
+      <%= form_with(model: Vote.new) do |f| %>
+        <%= f.hidden_field :value, value: vote ? 0 : -1 %>
+        <%= f.hidden_field :commit_id, value: commit.id %>
+        <button type="submit" class="btn btn-light btn-sm" title="Downvote">
+          <i
+            class="fas fa-caret-down vote downvote <%= 'red' if vote&.value == -1 %>"
+          ></i>
+        </button>
+      <% end %>
+    </div>
+    <div class="vote-number">
+      <%= commit.score %>
+    </div>
+  </div>
+</li>

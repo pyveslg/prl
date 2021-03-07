@@ -21,26 +21,15 @@
 
   <ul class="commit-listing mt-3">
     <% @commits.each do |commit| %>
-      <li>
-        <p><%= commit.message %></p>
-        <p><%= commit.user.full_name %></p>
-        <div class="votes-box">
-          <div class="votes">
-            <%=
-              render(
-                partial: "shared/vote",
-                locals: {
-                  commit: commit,
-                  vote: @session_votes_by_commit_id[commit.id],
-                }
-              )
-            %>
-          </div>
-          <div class="vote-number" id="commit-<%= commit.id %>">
-            <%= commit.score %>
-          </div>
-        </div>
-      </li>
+      <%=
+        render(
+          partial: "commits/commit",
+          locals: {
+            commit: commit,
+            vote: @session_votes_by_commit_id[commit.id],
+          }
+        )
+      %>
     <% end %>
   </ul>
 </div>
