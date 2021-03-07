@@ -16,7 +16,6 @@ class VotesController < ApplicationController
 
   def vote
     commit = Commit.find(params[:commit_id])
-    # Vote.find_or_create_by(commit: commit, value: params[:vote].to_i, session_id: session.id.to_s)
     votes = Vote.where(commit: commit, session_id: session.id)
     votes.destroy_all
     votes.create!(value: params[:value]) unless params[:value] == "0"
