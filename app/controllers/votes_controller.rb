@@ -19,12 +19,14 @@ class VotesController < ApplicationController
     votes = Vote.where(commit: commit, session_id: session.id)
     votes.destroy_all
     votes.create!(value: params[:value]) unless params[:value] == "0"
-    # render json: commit.votes.sum(:value)
     render json: {
        votes: commit.votes.sum(:value),
-       content: (render_to_string partial: "shared/vote", locals: {commit: commit}, layout: false )
+       content: render_to_string(
+         partial: "shared/vote",
+         locals: { commit: commit },
+         layout: false,
+       )
      }
-    # rendre une partial pour le vote en question
   end
 
 end
