@@ -6,17 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+repositories_by_batch = {
+  551 => [
+    # COLLECTION?
+    # P.Y.C.?
+    "https://github.com/troptropcontent/yummi",
+    "https://github.com/grambetta/game-aware",
+    "https://github.com/laurecdp/carefree",
+    "https://github.com/AlexandraCF/park_easy",
+    "https://github.com/jayk-u/phasing",
+  ],
+}
 
-batch = [551]
-
-batch.each do |b|
-  puts "------> Creating alumni for batch #{b}…"
-  GetAlumniJob.perform_now(b)
+repositories_by_batch.each do |batch, repositories|
+  puts "------> Creating #{repositories.count} repositories for batch #{batch}…"
+  repositories.each do |url|
+    Repository.matching_github_url(url).first_or_create!(batch: batch)
+  end
 end
 
-User.find_each do |u|
-  puts "------> Creating repositories for #{u.full_name}…"
-  CreateRepositoriesJob.perform_now(u)
+repositories_by_batch.keys.each do |b|
+  puts "------> Creating alumni for batch #{b}…"
+  GetAlumniJob.perform_now(b)
 end
 
 Repository.find_each do |r|
