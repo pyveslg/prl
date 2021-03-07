@@ -9,7 +9,7 @@ class CalculateScoreOnCommits < ActiveRecord::Migration[6.1]
   def up
     say_with_time "Updating scores on #{Commit.count} commits" do
       Commit.find_each do |commit|
-        commit.score = commit.votes.sum(:value)
+        commit.update_column(:score, commit.votes.sum(:value))
       end
     end
   end
