@@ -9,7 +9,7 @@
 repositories_by_batch = {
   551 => [
     "https://github.com/luciecam/collection-app",
-    # P.Y.C.?
+    "https://github.com/soufianejebbari/PYC",
     "https://github.com/troptropcontent/yummi",
     "https://github.com/grambetta/game-aware",
     "https://github.com/laurecdp/carefree",
