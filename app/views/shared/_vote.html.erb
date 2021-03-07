@@ -6,7 +6,7 @@
 ></i>
 <i
   class="fas fa-caret-down vote <%= 'red' if commit.downvoted_by?(session.id.to_s) %>"
- data-commit_id="<%= commit.id %>"
- data-vote="downvote"
- data-value="<%= commit.voted_by?(session.id.to_s) ? 0 : -1 %>"
+  data-commit_id="<%= commit.id %>"
+  data-vote="downvote"
+  data-value="<%= commit.voted_by?(session.id.to_s) ? 0 : -1 %>"
 ></i>
