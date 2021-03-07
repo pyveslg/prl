@@ -1,11 +1,10 @@
 class CommitsController < ApplicationController
-
   def index
     @total_count = Commit.count
     @batches = User.distinct.pluck(:batch).compact
     @usernames = usernames
     @commits = filtered_commits
-    @session_votes_by_commit = session_votes_by_commit
+    @session_votes_by_commit_id = session_votes_by_commit_id(@commits)
   end
 
   private
@@ -21,7 +20,7 @@ class CommitsController < ApplicationController
       commits = commits.where(user: { github_username: params[:username] })
     end
 
-    commits
+    commits.to_a
   end
 
   def usernames
@@ -30,9 +29,9 @@ class CommitsController < ApplicationController
     end
   end
 
-  def session_votes_by_commit
-    Vote.where(session_id: session.id.to_s).to_h do |vote|
-      [vote.commit_id, vote]
+  def session_votes_by_commit_id(commits)
+    Vote.where(session_id: session.id.to_s).where(commit: commits).to_h do |v|
+      [v.commit_id, v]
     end
   end
 end
