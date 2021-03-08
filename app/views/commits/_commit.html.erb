@@ -1,6 +1,14 @@
 <li id="<%= dom_id(commit) %>">
   <p><%= commit.message %></p>
-  <%= image_tag commit.user.photo_url, alt: commit.user.full_name, class: "avatar", data: {popover_target: "tooltip"}, onerror: "this.src='#{image_url "logo.png"}'" %>
+  <%=
+    image_tag(
+      commit.user.photo_url,
+      alt: commit.user.full_name,
+      class: "avatar",
+      data: { popover_target: "tooltip" },
+      onerror: "this.src='#{image_url("logo.png")}'",
+    )
+  %>
 
   <div class="votes-box">
     <div class="votes">
