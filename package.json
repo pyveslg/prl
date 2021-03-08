@@ -2,6 +2,7 @@
   "name": "prl",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.0.0-beta.5",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -11,7 +12,7 @@
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "rails-ujs": "^5.2.4-5",
-    "turbolinks": "^5.2.0"
+    "stimulus": "^2.0.0"
   },
   "version": "0.1.0",
   "devDependencies": {

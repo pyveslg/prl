@@ -1,20 +1,21 @@
 class VotesController < ApplicationController
-  def vote
-    commit = Commit.find(params[:commit_id])
+  def create
+    @commit = Commit.find(vote_params[:commit_id])
+    @vote = Vote.create_or_update_for_session_id(
+      session_id: session.id,
+      commit: @commit,
+      value: vote_params[:value],
+    )
 
-    votes = Vote.where(commit: commit, session_id: session.id.to_s)
-    votes.destroy_all
-    vote = votes.create!(value: params[:value]) unless params[:value] == "0"
+    respond_to do |format|
+      format.html { redirect_to commits_path }
+      format.turbo_stream
+    end
+  end
 
-    commit.update_column(:score, commit.votes.sum(:value))
+  private
 
-    render json: {
-      votes: commit.score,
-      content: render_to_string(
-        partial: "shared/vote",
-        locals: { commit: commit, vote: vote },
-        layout: false,
-      )
-     }
+  def vote_params
+    params.require(:vote).permit(:commit_id, :value)
   end
 end
