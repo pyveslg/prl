@@ -1,6 +1,8 @@
 # Prl_
 
-Votez pour les meilleurs messages de commits de votre batch!
+Votez pour les meilleurs commits de votre batch.
+
+<img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" width="250" />
 
 ## Installation
 
@@ -17,3 +19,10 @@ Créer un fichier `.env` à la racine contenant les lignes suivantes:
   publiques.
 
 Enfin, lancer `bin/setup`.
+
+## Déploiement
+
+```sh
+$ git push heroku master
+$ heroku run rails db:migrate db:seed
+```
