@@ -1,12 +1,19 @@
 <div class="container">
   <h1><%= pluralize @total_count, "commit" %></h1>
 
-  <%= form_tag commits_path, method: :get do %>
+  <%=
+    form_tag(
+      commits_path,
+      method: :get,
+      data: { controller: "submit-form" }
+    ) do
+  %>
     <%=
       select_tag(
         :batch,
         options_for_select(@batches, params[:batch]),
         prompt: "Batch number…",
+        data: { action: "change->submit-form#submit" },
       )
     %>
     <%=
@@ -14,9 +21,12 @@
         :username,
         options_for_select(@usernames, params[:username]),
         prompt: "User…",
+        data: { action: "change->submit-form#submit" },
       )
     %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
+    <noscript>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    </noscript>
   <% end %>
 
   <ul class="commit-listing mt-3">
