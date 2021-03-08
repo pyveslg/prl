@@ -5,7 +5,7 @@ class Vote < ApplicationRecord
 
   def self.create_or_update_for_session_id(session_id:, commit:, value:)
     transaction do
-      votes = commit.votes.where(session_id: session_id)
+      votes = commit.votes.where(session_id: session_id.to_s)
       votes.destroy_all
 
       vote = votes.create!(value: value) unless value.to_i == 0

@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   def create
     @commit = Commit.find(vote_params[:commit_id])
     @vote = Vote.create_or_update_for_session_id(
-      session_id: session.id.to_s,
+      session_id: session.id,
       commit: @commit,
       value: vote_params[:value],
     )
