@@ -19,6 +19,7 @@ class GetAlumniJob < ApplicationJob
         first_name: user_info["first_name"],
         last_name: user_info["last_name"],
         batch: batch,
+        photo_url: "https://kitt.lewagon.com/placeholder/users/#{user_info["github"]}"
       )
 
       puts "#{user.first_name} #{user.last_name} created"

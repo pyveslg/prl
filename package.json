@@ -12,7 +12,8 @@
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "rails-ujs": "^5.2.4-5",
-    "stimulus": "^2.0.0"
+    "stimulus": "^2.0.0",
+    "tippy.js": "^6.3.1"
   },
   "version": "0.1.0",
   "devDependencies": {
