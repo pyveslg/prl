@@ -4,7 +4,7 @@ class VotesController < ApplicationController
     @vote = Vote.create_or_update_for_session_id(
       session_id: session.id.to_s,
       commit: @commit,
-      value: vote_params[:value].to_i,
+      value: vote_params[:value],
     )
 
     respond_to do |format|
