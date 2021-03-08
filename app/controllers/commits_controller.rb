@@ -3,14 +3,15 @@ class CommitsController < ApplicationController
     @total_count = Commit.count
     @batches = User.distinct.pluck(:batch).compact
     @usernames = usernames
-    @commits = filtered_commits
+    @pagy, commits = pagy(filtered_commits)
+    @commits = commits.to_a
     @session_votes_by_commit_id = session_votes_by_commit_id(@commits)
   end
 
   private
 
   def filtered_commits
-    commits = Commit.includes(:user).order(score: :desc).by_random.limit(100)
+    commits = Commit.includes(:user).order(score: :desc).by_random
 
     if params[:batch].present?
       commits = commits.where(user: { batch: params[:batch] })
@@ -20,7 +21,7 @@ class CommitsController < ApplicationController
       commits = commits.where(user: { github_username: params[:username] })
     end
 
-    commits.to_a
+    commits
   end
 
   def usernames
