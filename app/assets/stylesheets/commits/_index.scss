@@ -4,7 +4,7 @@
   li {
     display: grid;
     align-items: center;
-    grid-template-columns: 2fr 1fr 50px;
+    grid-template-columns: 2fr 1fr 4em;
     background-color: white;
     padding: 12px;
     border-radius: 4px;
@@ -45,3 +45,6 @@
   color: $danger;
 }
 
+.pagination {
+  justify-content: center;
+}
