@@ -16,6 +16,9 @@ CommitsByRepositoryQuery = GithubApi::Client.parse <<-'GRAPHQL'
                       login
                     }
                   }
+                  committer {
+                    email
+                  }
                 }
               }
             }

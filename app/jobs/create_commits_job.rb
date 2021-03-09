@@ -6,6 +6,8 @@ class CreateCommitsJob < ApplicationJob
       repository.github_username,
       repository.name
     ) do |commit|
+      next if commit.dig("committer", "email") == "noreply@github.com"
+
       hash = commit["id"]
       next if Commit.where(github_id: hash).any?
 
@@ -14,7 +16,6 @@ class CreateCommitsJob < ApplicationJob
       next if author.nil?
 
       message = commit["message"].lines.first.strip
-      next if message =~ /^Merge/
 
       puts "#{repository.full_name}: <#{author_login}> #{message}"
       Commit.create!(
