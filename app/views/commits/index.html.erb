@@ -1,5 +1,8 @@
 <div class="container">
   <h1><%= pluralize @total_count, "commit" %></h1>
+  <% Commit::SCOPES.each do |path| %>
+    <%= link_to path, path %>
+  <% end %>
 
   <%=
     form_tag(

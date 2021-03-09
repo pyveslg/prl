@@ -11,7 +11,7 @@ class CommitsController < ApplicationController
   private
 
   def filtered_commits
-    commits = Commit.includes(:user).order(score: :desc).by_random
+    commits = Commit.includes(:user).send(path).by_random
 
     if params[:batch].present?
       commits = commits.where(user: { batch: params[:batch] })
@@ -34,5 +34,9 @@ class CommitsController < ApplicationController
     Vote.where(session_id: session.id.to_s).where(commit: commits).to_h do |v|
       [v.commit_id, v]
     end
+  end
+
+  def path
+    request.path == commits_path ? 'random' : request.path.delete('/')
   end
 end
