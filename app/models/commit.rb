@@ -8,8 +8,8 @@ class Commit < ApplicationRecord
   scope :recent, ->(*) { order(created_at: :desc) }
   scope :random, ->(*) { }
 
-  scope :upvoted, ->(session_id) { joins(:votes).where('votes.session_id = ?', session_id.to_s).hot}
+  scope :voted, ->(session_id) { joins(:votes).where('votes.session_id = ?', session_id.to_s).hot}
 
   # didn't find a method to list scopes so don't forget to update this constant
-  SCOPES = ['random', 'top', 'hot', 'recent', 'upvoted']
+  SCOPES = ['random', 'top', 'hot', 'recent', 'voted']
 end
