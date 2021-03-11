@@ -1,6 +1,9 @@
 <div class="container commits">
   <div class="header">
-    <h1><span data-annotate-target="highlight"><%= @total_count %></span>  <%= "commit".pluralize(@total_count) %></h1>
+    <h1>
+      <span data-annotate-target="highlight"><%= @total_count %></span>
+      <%= "commit".pluralize(@total_count) %>
+    </h1>
 
     <%=
       form_tag(
