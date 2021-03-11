@@ -6,7 +6,7 @@ class Commit < ApplicationRecord
   scope :top, ->(*) { order(score: :desc) }
   scope :hot, ->(*) { joins('LEFT JOIN votes ON commits.id = votes.commit_id').order('votes.created_at') }
   scope :recent, ->(*) { order(created_at: :desc) }
-  scope :random, ->(*) { }
+  scope :random, ->(*) { all }
 
   scope :voted, ->(session_id) { joins(:votes).where('votes.session_id = ?', session_id.to_s).hot}
 
