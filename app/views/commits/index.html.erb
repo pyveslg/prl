@@ -54,7 +54,5 @@
     </ul>
   </div>
 
-  <% if @pagy.pages > 1 %>
-    <%== pagy_bootstrap_nav @pagy %>
-  <% end %>
+  <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
 </div>
