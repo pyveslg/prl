@@ -1,3 +1,7 @@
+.commits-index {
+  overflow: hidden;
+}
+
 .commits {
   height: 100vh;
   overflow: hidden;
@@ -6,7 +10,7 @@
   .header {
     padding: 1rem 2rem 0 2em;
   }
-  .scrollable {
+  .scrollable-y {
     padding: .5rem 2rem;
   }
   .pagy-bootstrap-nav {
