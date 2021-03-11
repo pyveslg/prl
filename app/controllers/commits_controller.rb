@@ -11,7 +11,7 @@ class CommitsController < ApplicationController
   private
 
   def filtered_commits
-    commits = Commit.includes(:user).send(path, session.id).by_random
+    commits = Commit.includes(:user).public_send(path, session.id).by_random
 
     if params[:batch].present?
       commits = commits.where(user: { batch: params[:batch] })
