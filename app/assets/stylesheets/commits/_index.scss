@@ -1,3 +1,15 @@
+.commits {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .header, .scrollable { padding: .5rem 2rem; }
+  .pagy-bootstrap-nav {
+    padding-top: .5rem;
+    background-color: $bg-color;
+  }
+}
+
 .commit-listing {
   list-style: none;
   padding-left: 0;

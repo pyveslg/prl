@@ -14,7 +14,7 @@
     <div class="votes">
       <%= form_with(model: commit.votes.new) do |f| %>
         <%= f.hidden_field :commit_id %>
-        <%= f.hidden_field :value, value: vote ? 0 : 1 %>
+        <%= f.hidden_field :value, value: vote&.value == 1 ? 0 : 1 %>
         <button type="submit" class="btn btn-light btn-sm" title="Upvote">
           <i
             class="fas fa-caret-up vote upvote <%= 'green' if vote&.value == 1 %>"
@@ -24,7 +24,7 @@
 
       <%= form_with(model: commit.votes.new) do |f| %>
         <%= f.hidden_field :commit_id %>
-        <%= f.hidden_field :value, value: vote ? 0 : -1 %>
+        <%= f.hidden_field :value, value: vote&.value == -1 ? 0 : -1 %>
         <button type="submit" class="btn btn-light btn-sm" title="Downvote">
           <i
             class="fas fa-caret-down vote downvote <%= 'red' if vote&.value == -1 %>"

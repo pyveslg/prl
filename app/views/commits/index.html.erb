@@ -1,50 +1,57 @@
-<div class="container">
-  <h1><%= pluralize @total_count, "commit" %></h1>
-  <% Commit::SCOPES.each do |path| %>
-    <%= link_to path, path %>
-  <% end %>
+<div class="container commits">
+  <div class="header">
+    <h1>
+      <span data-annotate-target="highlight"><%= @total_count %></span>
+      <%= "commit".pluralize(@total_count) %>
+    </h1>
+    
+    <% Commit::SCOPES.each do |path| %>
+      <%= link_to path, path %>
+    <% end %>
 
-  <%=
-    form_tag(
-      commits_path,
-      method: :get,
-      data: { controller: "submit-form" }
-    ) do
-  %>
     <%=
-      select_tag(
-        :batch,
-        options_for_select(@batches, params[:batch]),
-        prompt: "Batch number…",
-        data: { action: "change->submit-form#submit" },
-      )
+      form_tag(
+        commits_path,
+        method: :get,
+        data: { controller: "submit-form" }
+      ) do
     %>
-    <%=
-      select_tag(
-        :username,
-        options_for_select(@usernames, params[:username]),
-        prompt: "User…",
-        data: { action: "change->submit-form#submit" },
-      )
-    %>
-    <noscript>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
-    </noscript>
-  <% end %>
-
-  <ul class="commit-listing mt-3">
-    <% @commits.each do |commit| %>
       <%=
-        render(
-          partial: "commits/commit",
-          locals: {
-            commit: commit,
-            vote: @session_votes_by_commit_id[commit.id],
-          }
+        select_tag(
+          :batch,
+          options_for_select(@batches, params[:batch]),
+          prompt: "Batch number…",
+          data: { action: "change->submit-form#submit" },
         )
       %>
+      <%=
+        select_tag(
+          :username,
+          options_for_select(@usernames, params[:username]),
+          prompt: "User…",
+          data: { action: "change->submit-form#submit" },
+        )
+      %>
+      <noscript>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </noscript>
     <% end %>
-  </ul>
+  </div>
+  <div class="scrollable">
+    <ul class="commit-listing mt-3">
+      <% @commits.each do |commit| %>
+        <%=
+          render(
+            partial: "commits/commit",
+            locals: {
+              commit: commit,
+              vote: @session_votes_by_commit_id[commit.id],
+            }
+          )
+        %>
+      <% end %>
+    </ul>
+  </div>
 
   <%== pagy_bootstrap_nav @pagy %>
 </div>

@@ -1,0 +1,56 @@
+.triangle, .circle {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  z-index: -1;
+}
+
+.triangle {
+  background-image: image-url("triangle.svg");
+}
+
+.circle {
+  background-image: image-url("circle.svg");
+}
+
+
+@for $i from 1 through 10 {
+  $cwidth: clamp(20px, #{random() * 50}px, 40px);
+  $cleft: random() * 100vw;
+  $cltop: min(10 * $i - 10, 10 * $i - 10 * random(10));
+  $ctop: 10 * $i * random(10);
+  $crtop: $i * 10;
+  .circle-#{$i} {
+    width: #{$cwidth};
+    height: #{$cwidth};
+    left: clamp(10vw, #{$cleft}, 80vw);
+    top: clamp(#{$cltop}vh, #{$ctop}vh, #{$crtop}vh);
+  }
+
+  .triangle-#{$i} {
+    $twidth: 47 * random();
+    $theight: 0.914 * $twidth;
+    $tltop: $cltop * 1vh - 1.5vh;
+    $ttop: $ctop * 1vh - 1.5vh;
+    $trtop: $crtop * 1vh - 1.5vh;
+    width: clamp(20px, #{$twidth}px, 40px);
+    height: clamp(18.28px, #{$theight}px, 36.56px);
+    left: calc(#{$cleft} + 150px);
+    top: clamp(#{$tltop}, #{$ttop}, #{$trtop});
+  }
+}
+
+
+@for $i from 1 through 8 {
+  $random: random(360) + deg;
+  $random2: calc(#{$random} + 360deg);
+  .triangle-#{$i} {
+    animation: spin-#{$i} 15s linear infinite;
+  }
+
+  @keyframes spin-#{$i} {
+    0% {transform: translateZ(0) rotate(#{$random})}
+    to {transform: translateZ(0) rotate(#{$random2})}
+  }
+}
