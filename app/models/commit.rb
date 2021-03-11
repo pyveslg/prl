@@ -11,5 +11,12 @@ class Commit < ApplicationRecord
   scope :voted, ->(session_id) { joins(:votes).where('votes.session_id = ?', session_id.to_s).hot}
 
   # didn't find a method to list scopes so don't forget to update this constant
-  SCOPES = ['random', 'top', 'hot', 'recent', 'voted']
+  SCOPES = {
+    commits: 'random',
+    random: 'random',
+    top: 'top',
+    hot: 'hot',
+    recent: 'recent',
+    voted: 'voted'
+  }
 end

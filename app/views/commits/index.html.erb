@@ -4,8 +4,8 @@
       <span data-annotate-target="highlight"><%= @total_count %></span>
       <%= "commit".pluralize(@total_count) %>
     </h1>
-    
-    <% Commit::SCOPES.each do |path| %>
+
+    <% Commit::SCOPES.values.uniq.each do |path| %>
       <%= link_to path, path %>
     <% end %>
 

@@ -37,6 +37,6 @@ class CommitsController < ApplicationController
   end
 
   def path
-    request.path == commits_path ? 'random' : request.path.delete('/')
+    Commit::SCOPES[request.path.delete('/').to_sym]
   end
 end
