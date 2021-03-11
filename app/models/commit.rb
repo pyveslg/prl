@@ -12,11 +12,11 @@ class Commit < ApplicationRecord
 
   # didn't find a method to list scopes so don't forget to update this constant
   SCOPES = {
-    commits: 'random',
-    random: 'random',
-    top: 'top',
-    hot: 'hot',
-    recent: 'recent',
-    voted: 'voted'
+    'commits' => 'random',
+    'random' => 'random',
+    'top' => 'top',
+    'hot' => 'hot',
+    'recent' => 'recent',
+    'voted' => 'voted'
   }
 end

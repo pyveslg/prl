@@ -11,7 +11,7 @@ class CommitsController < ApplicationController
   private
 
   def filtered_commits
-    commits = Commit.includes(:user).public_send(path, session.id)
+    commits = Commit.includes(:user).public_send(scope, session.id)
     commits = commits.where(user: { batch: @batch })
 
     if params[:username].present?
@@ -27,7 +27,7 @@ class CommitsController < ApplicationController
     end
   end
 
-  def path
-    Commit::SCOPES[request.path.delete('/').to_sym]
+  def scope
+    Commit::SCOPES[params[:scope]]
   end
 end
