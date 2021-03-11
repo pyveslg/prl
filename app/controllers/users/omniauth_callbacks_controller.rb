@@ -13,6 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
+    raise
     redirect_to root_path
   end
 end
