@@ -1,30 +1,30 @@
 <div class="container commits">
   <div class="header">
-    <h1>
-      <span data-annotate-target="highlight"><%= @total_count %></span>
-      <%= "commit".pluralize(@total_count) %>
-    </h1>
-
     <%=
-      form_tag(
-        commits_path,
+      form_with(
+        url: commits_path,
         method: :get,
         data: { controller: "submit-form" }
-      ) do
+      ) do |f|
     %>
       <%=
-        select_tag(
+        f.select(
           :batch,
-          options_for_select(@batches, params[:batch]),
-          prompt: "Batch number…",
+          @batches.map { |b| ["Batch ##{b}", b] },
+          {
+            selected: params[:batch],
+          },
           data: { action: "change->submit-form#submit" },
         )
       %>
       <%=
-        select_tag(
+        f.select(
           :username,
-          options_for_select(@usernames, params[:username]),
-          prompt: "User…",
+          @users.map { |u| [u.full_name, u.github_username] },
+          {
+            selected: params[:username],
+            include_blank: "All alumni",
+          },
           data: { action: "change->submit-form#submit" },
         )
       %>
@@ -32,6 +32,11 @@
         <%= submit_tag "Search", class: "btn btn-primary" %>
       </noscript>
     <% end %>
+
+    <h1 class="commits-count">
+      <span data-annotate-target="highlight"><%= @pagy.count %></span>
+      <%= "commit".pluralize(@pagy.count) %>
+    </h1>
   </div>
   <div class="scrollable">
     <ul class="commit-listing mt-3">
