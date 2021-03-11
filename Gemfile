@@ -36,6 +36,7 @@ gem 'pagy'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise'
+gem 'omniauth-github'
 
 # Connect to GitHub’s API
 gem 'graphql-client'
