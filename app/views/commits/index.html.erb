@@ -11,7 +11,7 @@
 
     <%=
       form_tag(
-        commits_path,
+        request.path,
         method: :get,
         data: { controller: "submit-form" }
       ) do
@@ -55,3 +55,4 @@
 
   <%== pagy_bootstrap_nav @pagy %>
 </div>
+<%= console %>
