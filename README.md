@@ -2,7 +2,7 @@
 
 Votez pour les meilleurs commits de votre batch.
 
-<img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" width="250" />
+<a href="https://www.wagonprl.com/"><img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" width="250" /></a>
 
 ## Installation
 
