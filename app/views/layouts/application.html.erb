@@ -19,8 +19,8 @@
       <%= link_to 'commits', commits_path  %>
       <%= link_to 'manage profile', profile_path %>
       <%= link_to 'Log out', destroy_user_session_path, method: :delete  %>
-    <% else %>
-      <%= link_to 'sign-in with github', user_github_omniauth_authorize_path %>
+    <%# else %>
+      <%=# link_to 'sign-in with github', user_github_omniauth_authorize_path %>
     <% end %>
   </body>
 </html>
