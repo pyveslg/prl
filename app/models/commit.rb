@@ -8,7 +8,9 @@ class Commit < ApplicationRecord
   scope :recent, ->(*) { order(created_at: :desc) }
   scope :random, ->(*) { by_random }
 
-  scope :voted, ->(session_id) { joins(:votes).where('votes.session_id = ?', session_id.to_s).hot}
+  scope :voted, ->(session_id) {
+    joins(:votes).where(votes: { session_id: session_id.to_s }).hot
+  }
 
   # Scopes that are publicly available (path => scope name)
   SCOPES = {
