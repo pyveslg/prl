@@ -10,7 +10,7 @@ class Commit < ApplicationRecord
 
   scope :voted, ->(session_id) { joins(:votes).where('votes.session_id = ?', session_id.to_s).hot}
 
-  # didn't find a method to list scopes so don't forget to update this constant
+  # Scopes that are publicly available (path => scope name)
   SCOPES = {
     'commits' => 'random',
     'random' => 'random',
