@@ -28,6 +28,6 @@ class CommitsController < ApplicationController
   end
 
   def scope
-    Commit::SCOPES[params[:scope]]
+    Commit::SCOPES.fetch(params[:scope])
   end
 end
