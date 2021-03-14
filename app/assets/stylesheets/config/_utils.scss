@@ -1,4 +1,8 @@
-.scrollable {
+.no-x-scrollable {
+  overflow-x: hidden;
+}
+
+.scrollable-y {
   height: 100%;
   overflow-y: auto;
 }
