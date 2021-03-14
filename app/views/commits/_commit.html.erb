@@ -32,8 +32,6 @@
         </button>
       <% end %>
     </div>
-    <div class="vote-number">
-      <%= commit.score %>
-    </div>
+    <%= render partial: 'commits/score', locals: { commit: commit } %>
   </div>
 </li>

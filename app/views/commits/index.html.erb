@@ -45,7 +45,10 @@
       <%= "commit".pluralize(@pagy.count) %>
     </h1>
   </div>
+
   <div class="scrollable-y custom-scrollbar custom-primary-scrollbar">
+    <%= turbo_stream_from "scores" %>
+
     <ul class="commit-listing mt-3">
       <% @commits.each do |commit| %>
         <%=
