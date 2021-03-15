@@ -6,6 +6,14 @@ class User < ApplicationRecord
   has_many :commits, dependent: :destroy
 
   def full_name
-    "#{first_name} #{last_name[0]}."
+    "#{first_name} #{short_last_name}".strip
+  end
+
+  private
+
+  def short_last_name
+    return if last_name.blank?
+
+    "#{last_name[0]}."
   end
 end
