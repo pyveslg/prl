@@ -1,7 +1,7 @@
 require "test_helper"
 
 class RepositoryTest < ActiveSupport::TestCase
-  test "full_name returns both the github handle and the name" do
+  test "full_name returns both the GitHub handle and the name" do
     repository = Repository.new(github_username: "pyveslg", name: "prl")
     assert_equal "pyveslg/prl", repository.full_name
   end
