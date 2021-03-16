@@ -34,8 +34,8 @@
             <%= submit_tag "Search", class: "btn btn-primary" %>
           </noscript>
         <% end %>
-        
-        <% Commit::SCOPES.values.uniq.each do |path| %>
+
+        <% Commit::SCOPES.keys.each do |path| %>
           <%= link_to path, path %>
         <% end %>
       </div>
