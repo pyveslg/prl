@@ -8,14 +8,17 @@
 
 repositories_by_batch = {
   551 => [
-    "https://github.com/luciecam/collection-app",
-    "https://github.com/soufianejebbari/PYC",
-    "https://github.com/troptropcontent/yummi",
-    "https://github.com/grambetta/game-aware",
-    "https://github.com/laurecdp/carefree",
-    "https://github.com/AlexandraCF/park_easy",
-    "https://github.com/jayk-u/phasing",
+    # "https://github.com/luciecam/collection-app",
+    # "https://github.com/soufianejebbari/PYC",
+    # "https://github.com/troptropcontent/yummi",
+    # "https://github.com/grambetta/game-aware",
+    # "https://github.com/laurecdp/carefree",
+    # "https://github.com/AlexandraCF/park_easy",
+    # "https://github.com/jayk-u/phasing",
   ],
+  401 => [
+    "https://github.com/alex-eyben/mon_depute"
+  ]
 }
 
 repositories_by_batch.each do |batch, repositories|
