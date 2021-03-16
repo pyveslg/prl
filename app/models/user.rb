@@ -11,11 +11,15 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(github_username: auth.info.nickname).first_or_create do |user|
-      user.email = auth.info.email
-      user.uid = auth.uid
-      user.provider = auth.provider
-      user.password = Devise.friendly_token[0, 20]
-    end
+    user = where(github_username: auth.info.nickname).first
+    return unless user
+
+    user.update(
+      email: auth.info.email,
+      uid: auth.uid,
+      provider: auth.provider,
+      password: Devise.friendly_token[0, 20]
+    )
+    user
   end
 end
