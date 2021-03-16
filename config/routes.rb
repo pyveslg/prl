@@ -4,9 +4,8 @@ Rails.application.routes.draw do
 
   get ":scope",
     to: "commits#index",
-    constraints: { scope: Commit::SCOPES.keys }
+    constraints: lambda {|request| Commit::SCOPES.keys.include?(request[:scope])},
+    as: :scopes
 
   resources :votes, only: :create
-  resources :commits, only: :index
-
 end

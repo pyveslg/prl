@@ -14,7 +14,6 @@ class Commit < ApplicationRecord
 
   # Scopes that are publicly available (path => scope name)
   SCOPES = {
-    'commits' => 'random',
     'random' => 'random',
     'top' => 'top',
     'hot' => 'hot',
