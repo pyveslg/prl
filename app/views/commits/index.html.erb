@@ -36,7 +36,7 @@
         <% end %>
 
         <% Commit::SCOPES.keys.each do |path| %>
-          <%= link_to path, path, class: "#{'selected' if params[:scope] == path}" %>
+          <%= link_to path, path, class: ('selected' if params[:scope] == path) %>
         <% end %>
       </div>
       <div class="col text-sm-right">
