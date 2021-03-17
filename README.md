@@ -37,7 +37,7 @@ Authorization callback URL : Un host public est necessaire, github ne peut renvo
 
 ```sh
 $ brew install ngrok
-$ ngrok http your_port (usually 3000)
+$ ngrok http 3000
 ```
 
 vous avez maintenant une URL publique (http://letters_and_numbers.ngrok.io)
