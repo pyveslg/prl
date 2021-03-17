@@ -42,7 +42,8 @@ $ ngrok http 3000
 
 vous avez maintenant une URL publique (http://letters_and_numbers.ngrok.io)
 
-l'Authorization callback URL va donc ressembler a `http://3aa8f0f7.ngrok.io/users/auth/github/callback`
+l'Authorization callback URL va donc ressembler à
+`http://3aa8f0f7.ngrok.io/users/auth/github/callback`
 
 Une fois cette information ajoutée sur github : `Register aplication`
 
