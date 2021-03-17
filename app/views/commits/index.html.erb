@@ -4,7 +4,7 @@
       <div class="col-sm-auto">
         <%=
           form_with(
-            url: commits_path,
+            url: scopes_path('random'),
             method: :get,
             data: { controller: "submit-form" }
           ) do |f|
@@ -33,6 +33,10 @@
           <noscript>
             <%= submit_tag "Search", class: "btn btn-primary" %>
           </noscript>
+        <% end %>
+
+        <% Commit::SCOPES.keys.each do |path| %>
+          <%= link_to path, path, class: ('selected' if params[:scope] == path) %>
         <% end %>
       </div>
       <div class="col text-sm-right">
