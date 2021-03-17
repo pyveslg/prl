@@ -13,6 +13,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path, alert: 'something went wrong'
+    redirect_to root_path, alert: 'Something went wrong.'
   end
 end
