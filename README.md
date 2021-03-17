@@ -55,4 +55,4 @@ et ajouter votre host ngrok :
 
 - `NGROK_HOST=something.ngrok.io` (remplacez something par votre sous domaine ngrok evidemment)
 
-N'oubliez pas de redemarrer votre `rails s` !
+N’oubliez pas de redémarrer votre `rails s` !
