@@ -51,7 +51,7 @@ Copier les clés fournies par github dans .env :
 - `GITHUB_ID=...`
 - `GITHUB_SECRET=...`
 
-et ajouter votre host Ngrok :
+et ajouter votre host ngrok :
 
 - `NGROK_HOST=something.ngrok.io` (remplacez something par votre sous domaine ngrok evidemment)
 
