@@ -1,13 +1,26 @@
+.commits-index {
+  overflow: hidden;
+}
+
 .commits {
   height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  .header, .scrollable { padding: .5rem 2rem; }
+  .header {
+    padding: 1rem 2rem 0 2em;
+  }
+  .scrollable-y {
+    padding: .5rem 2rem;
+  }
   .pagy-bootstrap-nav {
     padding-top: .5rem;
     background-color: $bg-color;
   }
+}
+
+.commits-count {
+  margin-top: .5em;
 }
 
 .commit-listing {
@@ -62,4 +75,8 @@
 
 .pagination {
   justify-content: center;
+}
+
+.selected {
+  text-decoration: underline;
 }

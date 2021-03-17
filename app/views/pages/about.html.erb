@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-8">
+      <h1 class="mt-5 mb-5">
+        <%= image_tag("logo.png", alt: "", class: "mini-logo", size: "64x64") %>
+        About
+        Prl<span class="animate__animated animate__flash animate__infinite infinite">_</span>
+      </h1>
+
+      <h2>What is this?</h2>
+      <p>
+        This is a collection of the best commits from the demo-day projects of the
+        fullstack Web Development batches at the
+        <%= link_to "Le Wagon", "https://www.lewagon.com/", target: "_blank" %> bootcamp.
+      </p>
+
+      <h2>Why “Prl”?</h2>
+      <p>
+        Because this lets us find the best commit message *perls*.
+      </p>
+
+      <h2>Who did this?</h2>
+      <p>
+        This is not affiliated to Le Wagon, but rather a little app created by
+        <code>@pyveslg</code>,
+        <code>@sunny</code>,
+        <code>@Thibaud Maurel</code>,
+        and <code>@vh</code>.
+      </p>
+
+      <h2>Can I remove my commits?</h2>
+      <p>
+        Sure! Every commit message here is publicly available on GitHub, but if
+        you wish to remove any or all of your commits from Prl, feel free to send
+        any of us a private message on Slack.
+      </p>
+
+      <h2>Can I contribute?</h2>
+      <p>
+        Code for this app is on GitHub at
+        <%= link_to "pyveslg/prl", "https://github.com/pyveslg/prl", target: "_blank" %>
+      </p>
+
+      <h2>A final word</h2>
+      <p>
+        Need inspiration for your next commit message? Check out
+        <%= link_to "whatthecommit.com", "http://whatthecommit.com/", target: "_blank" %>.
+      </p>
+
+      <p class="mt-5 mb-5">
+        <%= link_to "Back to the perls", commits_path, class: "btn btn-primary" %>
+      </p>
+    </div>
+  </div>
+</div>

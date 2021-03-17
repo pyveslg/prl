@@ -1,39 +1,58 @@
 <div class="container commits">
   <div class="header">
-    <h1>
-      <span data-annotate-target="highlight"><%= @total_count %></span>
-      <%= "commit".pluralize(@total_count) %>
-    </h1>
+    <div class="row">
+      <div class="col-sm-auto">
+        <%=
+          form_with(
+            url: scopes_path('random'),
+            method: :get,
+            data: { controller: "submit-form" }
+          ) do |f|
+        %>
+          <%=
+            f.select(
+              :batch,
+              @batches.map { |b| ["Batch ##{b}", b] },
+              {
+                selected: params[:batch],
+              },
+              data: { action: "change->submit-form#submit" },
+            )
+          %>
+          <%=
+            f.select(
+              :username,
+              @users.map { |u| [u.full_name, u.github_username] },
+              {
+                selected: params[:username],
+                include_blank: "All alumni",
+              },
+              data: { action: "change->submit-form#submit" },
+            )
+          %>
+          <noscript>
+            <%= submit_tag "Search", class: "btn btn-primary" %>
+          </noscript>
+        <% end %>
 
-    <%=
-      form_tag(
-        commits_path,
-        method: :get,
-        data: { controller: "submit-form" }
-      ) do
-    %>
-      <%=
-        select_tag(
-          :batch,
-          options_for_select(@batches, params[:batch]),
-          prompt: "Batch number…",
-          data: { action: "change->submit-form#submit" },
-        )
-      %>
-      <%=
-        select_tag(
-          :username,
-          options_for_select(@usernames, params[:username]),
-          prompt: "User…",
-          data: { action: "change->submit-form#submit" },
-        )
-      %>
-      <noscript>
-        <%= submit_tag "Search", class: "btn btn-primary" %>
-      </noscript>
-    <% end %>
+        <% Commit::SCOPES.keys.each do |path| %>
+          <%= link_to path, path, class: ('selected' if params[:scope] == path) %>
+        <% end %>
+      </div>
+      <div class="col text-sm-right">
+        <p><%= link_to "About", about_path %></p>
+      </div>
+    </div>
+
+    <h1 class="commits-count">
+      <span data-annotate-target="highlight"><%= @pagy.count %></span>
+      <%= "commit".pluralize(@pagy.count) %>
+    </h1>
   </div>
-  <div class="scrollable">
+
+  <div class="scrollable-y custom-scrollbar custom-primary-scrollbar">
+    <%= turbo_stream_from "scores" %>
+
     <ul class="commit-listing mt-3">
       <% @commits.each do |commit| %>
         <%=
@@ -49,5 +68,5 @@
     </ul>
   </div>
 
-  <%== pagy_bootstrap_nav @pagy %>
+  <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
 </div>
