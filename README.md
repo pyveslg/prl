@@ -45,7 +45,7 @@ vous avez maintenant une URL publique (http://letters_and_numbers.ngrok.io)
 l'Authorization callback URL va donc ressembler à
 `http://3aa8f0f7.ngrok.io/users/auth/github/callback`
 
-Une fois cette information ajoutée sur github : `Register aplication`
+Une fois cette information ajoutée sur GitHub : `Register aplication`
 
 Copier les clés fournies par github dans .env :
 - `GITHUB_ID=...`
