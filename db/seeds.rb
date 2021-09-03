@@ -16,6 +16,19 @@ repositories_by_batch = {
     "https://github.com/AlexandraCF/park_easy",
     "https://github.com/jayk-u/phasing",
   ],
+  601 => [
+    "https://github.com/Tiebow/MATCH_POINT",
+    "https://github.com/anietchka/kids-out",
+    "https://github.com/Anne-crypt/PACMAN-GO",
+    "https://github.com/Ztrub19/SwipArt",
+    "https://github.com/1maaat/rocketly",
+    "https://github.com/BeneNolte/jicama",
+    "https://github.com/Andrea-ellii/ellii",
+    "https://github.com/quentin-peschard/drug_dealer",
+    "https://github.com/mar7ius/simple-trip-me",
+    "https://github.com/OrnellaBis/Surf_Go",
+    "https://github.com/ricawdo/air_cut",
+  ],
 }
 
 repositories_by_batch.each do |batch, repositories|
