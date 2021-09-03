@@ -11,7 +11,7 @@ class CommitsController < ApplicationController
   private
 
   def filtered_commits
-    commits = Commit.includes(:user).order(score: :desc).by_random
+    commits = Commit.includes(:user).public_send(scope, session.id)
     commits = commits.where(user: { batch: @batch })
 
     if params[:username].present?
@@ -25,5 +25,9 @@ class CommitsController < ApplicationController
     Vote.where(session_id: session.id.to_s).where(commit: commits).to_h do |v|
       [v.commit_id, v]
     end
+  end
+
+  def scope
+    Commit::SCOPES.fetch(params[:scope])
   end
 end

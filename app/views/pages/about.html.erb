@@ -48,7 +48,13 @@
       </p>
 
       <p class="mt-5 mb-5">
-        <%= link_to "Back to the perls", commits_path, class: "btn btn-primary" %>
+        <%=
+          link_to(
+            "‹ Back to the perls",
+            scopes_path("random"),
+            class: "btn btn-primary",
+          )
+        %>
       </p>
     </div>
   </div>

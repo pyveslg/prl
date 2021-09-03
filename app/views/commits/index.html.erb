@@ -4,7 +4,7 @@
       <div class="col-sm-auto">
         <%=
           form_with(
-            url: commits_path,
+            url: scopes_path('random'),
             method: :get,
             data: { controller: "submit-form" }
           ) do |f|
@@ -35,8 +35,13 @@
           </noscript>
         <% end %>
       </div>
+      <div class="col-sm-auto">
+        <% Commit::SCOPES.keys.each do |path| %>
+          <%= link_to path, path, class: ('selected' if params[:scope] == path) %>
+        <% end %>
+      </div>
       <div class="col text-sm-right">
-        <p><%= link_to "About", about_path %></p>
+        <p><%= link_to "about", about_path %></p>
       </div>
     </div>
 
@@ -45,7 +50,10 @@
       <%= "commit".pluralize(@pagy.count) %>
     </h1>
   </div>
+
   <div class="scrollable-y custom-scrollbar custom-primary-scrollbar">
+    <%= turbo_stream_from "scores" %>
+
     <ul class="commit-listing mt-3">
       <% @commits.each do |commit| %>
         <%=

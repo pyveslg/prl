@@ -35,7 +35,8 @@ gem 'pagy'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise'
+gem 'omniauth-github', '~> 1.1'
 
 # Connect to GitHub’s API
 gem 'graphql-client'
