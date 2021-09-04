@@ -1,7 +1,8 @@
 class CommitsController < ApplicationController
   def index
     @batch = params[:batch] || User.maximum(:batch)
-    @batches = User.distinct.where.not(batch: nil).pluck(:batch)
+    @batches =
+      User.distinct.where.not(batch: nil).order(batch: :desc).pluck(:batch)
     @users = User.where(batch: @batch).order(:first_name, :last_name)
     @pagy, commits = pagy(filtered_commits)
     @commits = commits.to_a
