@@ -1,0 +1,57 @@
+<div class="header">
+  <div class="row">
+    <div class="col-sm-auto">
+      <%=
+        form_with(
+          url: scopes_path(Commit::SCOPES.first),
+          method: :get,
+          data: { controller: "submit-form" }
+        ) do |f|
+      %>
+        <%=
+          f.select(
+            :batch,
+            @batches.map { |b| ["Batch ##{b}", b] },
+            {
+              selected: params[:batch],
+            },
+            data: { action: "change->submit-form#submit" },
+          )
+        %>
+        <%=
+          f.select(
+            :username,
+            @users.map { |u| [u.full_name, u.github_username] },
+            {
+              selected: params[:username],
+              include_blank: "All alumni",
+            },
+            data: { action: "change->submit-form#submit" },
+          )
+        %>
+        <noscript>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        </noscript>
+      <% end %>
+    </div>
+    <div class="col-sm-auto">
+      <% Commit::SCOPES.each do |scope| %>
+        <%=
+          link_to(
+            scope,
+            scopes_path(scope),
+            class: ('selected' if params[:scope] == scope),
+          )
+        %>
+      <% end %>
+    </div>
+    <div class="col text-sm-right">
+      <p><%= link_to "about", about_path %></p>
+    </div>
+  </div>
+
+  <h1 class="commits-count">
+    <span data-annotate-target="highlight"><%= @pagy.count %></span>
+    <%= "commit".pluralize(@pagy.count) %>
+  </h1>
+</div>
