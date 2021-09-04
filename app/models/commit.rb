@@ -13,11 +13,11 @@ class Commit < ApplicationRecord
   }
 
   # Scopes that are publicly available (path => scope name)
-  SCOPES = {
-    'random' => 'random',
-    'top' => 'top',
-    'hot' => 'hot',
-    'recent' => 'recent',
-    'voted' => 'voted'
-  }
+  SCOPES = %w[
+    top
+    random
+    hot
+    recent
+    voted
+  ]
 end

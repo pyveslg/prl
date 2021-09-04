@@ -28,6 +28,6 @@ class CommitsController < ApplicationController
   end
 
   def scope
-    Commit::SCOPES.fetch(params[:scope])
+    params[:scope] if Commit::SCOPES.include?(params[:scope])
   end
 end
