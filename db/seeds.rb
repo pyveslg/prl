@@ -7,27 +7,34 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 repositories_by_batch = {
-  551 => [
-    "https://github.com/luciecam/collection-app",
-    "https://github.com/soufianejebbari/PYC",
-    "https://github.com/troptropcontent/yummi",
-    "https://github.com/grambetta/game-aware",
-    "https://github.com/laurecdp/carefree",
-    "https://github.com/AlexandraCF/park_easy",
-    "https://github.com/jayk-u/phasing",
+  551 => %w[
+    https://github.com/luciecam/collection-app
+    https://github.com/soufianejebbari/PYC
+    https://github.com/troptropcontent/yummi
+    https://github.com/grambetta/game-aware
+    https://github.com/laurecdp/carefree
+    https://github.com/AlexandraCF/park_easy
+    https://github.com/jayk-u/phasing
   ],
-  601 => [
-    "https://github.com/Tiebow/MATCH_POINT",
-    "https://github.com/anietchka/kids-out",
-    "https://github.com/Anne-crypt/PACMAN-GO",
-    "https://github.com/Ztrub19/SwipArt",
-    "https://github.com/1maaat/rocketly",
-    "https://github.com/BeneNolte/jicama",
-    "https://github.com/Andrea-ellii/ellii",
-    "https://github.com/quentin-peschard/drug_dealer",
-    "https://github.com/mar7ius/simple-trip-me",
-    "https://github.com/OrnellaBis/Surf_Go",
-    "https://github.com/ricawdo/air_cut",
+  591 => %w[
+    https://github.com/nicolasdubet/FEELER
+    https://github.com/Lenjy/un_pas_pour_les_autres
+    https://github.com/CeliaTrache/SoundOn
+    https://github.com/ChenchenZheng/le-plateau
+    https://github.com/sugarsheet/book_society
+  ],
+  660 => %w[
+    https://github.com/Tiebow/MATCH_POINT
+    https://github.com/anietchka/kids-out
+    https://github.com/Anne-crypt/PACMAN-GO
+    https://github.com/Ztrub19/SwipArt
+    https://github.com/1maaat/rocketly
+    https://github.com/BeneNolte/jicama
+    https://github.com/Andrea-ellii/ellii
+    https://github.com/quentin-peschard/drug_dealer
+    https://github.com/mar7ius/simple-trip-me
+    https://github.com/OrnellaBis/Surf_Go
+    https://github.com/ricawdo/air_cut
   ],
 }
 
