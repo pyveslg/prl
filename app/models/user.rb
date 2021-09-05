@@ -4,6 +4,7 @@ class User < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :omniauthable, omniauth_providers: [:github]
+
   has_many :commits, dependent: :destroy
 
   scope :by_name, -> { order(:first_name, :last_name) }
