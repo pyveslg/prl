@@ -42,5 +42,4 @@ class CommitsController < ApplicationController
       @batches.first
     end
   end
-  helper_method :batch
 end

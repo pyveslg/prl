@@ -14,7 +14,7 @@
             @batches.map { |b| ["Batch ##{b}", b] },
             {
               include_blank: "All batches",
-              selected: batch,
+              selected: params[:batch],
             },
             data: { action: "change->submit-form#submit" },
           )
