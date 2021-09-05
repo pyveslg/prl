@@ -51,7 +51,9 @@
   </div>
 
   <h1 class="commits-count">
-    <span data-annotate-target="highlight"><%= @pagy.count %></span>
+    <span data-annotate-target="highlight">
+      <%= number_with_delimiter @pagy.count %>
+    </span>
     <%= "commit".pluralize(@pagy.count) %>
   </h1>
 </div>
