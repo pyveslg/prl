@@ -1,9 +1,11 @@
 class CommitsController < ApplicationController
   def index
-    @batch = params[:batch] || User.maximum(:batch)
     @batches =
       User.distinct.where.not(batch: nil).order(batch: :desc).pluck(:batch)
-    @users = User.where(batch: @batch).order(:first_name, :last_name)
+    if batch
+      @users = User.where(batch: batch).order(:first_name, :last_name)
+    end
+
     @pagy, commits = pagy(filtered_commits)
     @commits = commits.to_a
     @session_votes_by_commit_id = session_votes_by_commit_id(@commits)
@@ -13,7 +15,7 @@ class CommitsController < ApplicationController
 
   def filtered_commits
     commits = Commit.includes(:user).public_send(scope, session.id)
-    commits = commits.where(user: { batch: @batch })
+    commits = commits.where(user: { batch: batch }) if batch
 
     if params[:username].present?
       commits = commits.where(user: { github_username: params[:username] })
@@ -31,4 +33,14 @@ class CommitsController < ApplicationController
   def scope
     params[:scope] if Commit::SCOPES.include?(params[:scope])
   end
+
+  # Returns nil when the batch param is set to an empty string (all batches).
+  def batch
+    if @batches.include?(params[:batch])
+      params[:batch]
+    elsif params[:batch].nil?
+      @batches.first
+    end
+  end
+  helper_method :batch
 end

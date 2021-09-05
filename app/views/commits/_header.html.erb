@@ -13,7 +13,8 @@
             :batch,
             @batches.map { |b| ["Batch ##{b}", b] },
             {
-              selected: params[:batch],
+              include_blank: "All batches",
+              selected: batch,
             },
             data: { action: "change->submit-form#submit" },
           )
@@ -29,6 +30,19 @@
             data: { action: "change->submit-form#submit" },
           )
         %>
+        <% if @users %>
+          <%=
+            f.select(
+              :username,
+              @users.map { |u| [u.full_name, u.github_username] },
+              {
+                selected: params[:username],
+                include_blank: "All alumni",
+              },
+              data: { action: "change->submit-form#submit" },
+            )
+          %>
+        <% end %>
         <noscript>
           <%= submit_tag "Search", class: "btn btn-primary" %>
         </noscript>
@@ -39,7 +53,11 @@
         <%=
           link_to(
             scope,
-            scopes_path(scope),
+            scopes_path(
+              scope,
+              batch: params[:batch],
+              username: params[:username],
+            ),
             class: ('selected' if params[:scope] == scope),
           )
         %>
