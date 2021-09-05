@@ -39,8 +39,8 @@
         <%=
           link_to(
             scope,
-            scopes_path(scope),
-            class: ('selected' if params[:scope] == scope),
+            scopes_path(scope, batch: params[:batch], username: params[:username]),
+            class: ('selected' if params[:scope] == scope)
           )
         %>
       <% end %>
