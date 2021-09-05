@@ -1,6 +1,6 @@
 class KittService::GetUserListForABatch
-  def initialize(batch:)
-    @batch = batch
+  def initialize(batch_number:)
+    @batch = batch_number
   end
 
   def call
