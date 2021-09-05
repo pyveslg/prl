@@ -19,17 +19,6 @@
             data: { action: "change->submit-form#submit" },
           )
         %>
-        <%=
-          f.select(
-            :username,
-            @users.map { |u| [u.full_name, u.github_username] },
-            {
-              selected: params[:username],
-              include_blank: "All alumni",
-            },
-            data: { action: "change->submit-form#submit" },
-          )
-        %>
         <% if @users %>
           <%=
             f.select(
