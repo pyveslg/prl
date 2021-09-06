@@ -12,8 +12,8 @@ class PrlService::FindAllGroupReposForOneBatch
     puts 'getting github nicknames for each alumnus in each group..'
     github_groups = products.map{_1.teammates.map{|teammate| alumni[teammate['id']].github_nick}}
     puts 'getting repos for each github user & finding intersections..'
-    github_groups.map{GithubService::FindCommonRepos.new(github_usernames: _1).call}
+    group_repos = github_groups.map{GithubService::FindCommonRepos.new(github_usernames: _1).call}
     puts "Done in #{(Time.now - start_time).round(2)} seconds (which is painfully slow)"
-    github_groups
+    group_repos
   end
 end
