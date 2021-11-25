@@ -36,6 +36,16 @@ repositories_by_batch = {
     https://github.com/OrnellaBis/Surf_Go
     https://github.com/ricawdo/air_cut
   ],
+  731 => %w[
+    https://github.com/Delphine-cph/tocare
+    https://github.com/steppan26/myra
+    https://github.com/Charlotte-smets/rails-artmeets
+    https://github.com/yasmine-glitch/STORK
+    https://github.com/margliard/slowtravel
+    https://github.com/Vigrouze/freementors
+    https://github.com/tdeganay/dcrypt
+    https://github.com/JulienMalcouronne/FestivOut
+  ],
 }
 
 repositories_by_batch.each do |batch, repositories|
