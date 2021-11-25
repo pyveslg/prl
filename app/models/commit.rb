@@ -12,13 +12,9 @@ class Commit < ApplicationRecord
     voted
   ]
 
-  scope :top, ->(_session_id) { order(score: :desc) }
-  scope :random, ->(_session_id) { by_random }
-  scope :hot, ->(_session_id) {
-    left_joins(:votes).order(Vote.arel_table[:created_at])
-  }
-  scope :recent, ->(_session_id) { order(created_at: :desc) }
-  scope :voted, ->(session_id) {
-    joins(:votes).where(votes: { session_id: session_id.to_s }).hot
-  }
+  scope :top, -> { order(score: :desc) }
+  scope :random, -> { by_random }
+  scope :hot, -> { joins(:votes).order(Vote.arel_table[:created_at].desc) }
+  scope :recent, -> { order(created_at: :desc) }
+  scope :voted, -> session_id { hot.where(votes: { session_id: session_id }) }
 end
