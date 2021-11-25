@@ -52,4 +52,13 @@ class CommitsController < ApplicationController
   def scope_arguments
     [session.id] if scope == "voted"
   end
+
+  # Returns nil when the batch param is set to an empty string (all batches).
+  def batch
+    if @batches.include?(params[:batch])
+      params[:batch]
+    elsif params[:batch].nil?
+      @batches.first
+    end
+  end
 end

@@ -5,7 +5,7 @@
         form_with(
           url: scopes_path(Commit::SCOPES.first),
           method: :get,
-          data: { controller: "submit-form" }
+          data: { controller: "commits-filter", commits_filter_target: "form" },
         ) do |f|
       %>
         <%=
@@ -16,7 +16,7 @@
               selected: params[:batch],
               include_blank: "All batches",
             },
-            data: { action: "change->submit-form#submit" },
+            data: { action: "change->commits-filter#changeBatch" },
           )
         %>
         <% if @users %>
@@ -28,7 +28,10 @@
                 selected: params[:username],
                 include_blank: "All alumni",
               },
-              data: { action: "change->submit-form#submit" },
+              data: {
+                commits_filter_target: "username",
+                action: "change->commits-filter#changeUsername",
+              },
             )
           %>
         <% end %>
