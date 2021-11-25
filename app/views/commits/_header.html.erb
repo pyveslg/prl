@@ -40,7 +40,7 @@
           link_to(
             scope,
             scopes_path(scope, batch: params[:batch], username: params[:username]),
-            class: ('selected' if params[:scope] == scope)
+            class: ('selected' if current_scope == scope),
           )
         %>
       <% end %>
