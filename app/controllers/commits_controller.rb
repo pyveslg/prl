@@ -2,19 +2,29 @@ class CommitsController < ApplicationController
   def index
     @batches =
       User.distinct.where.not(batch: nil).order(batch: :desc).pluck(:batch)
-    if batch
-      @users = User.where(batch: batch).order(:first_name, :last_name)
-    end
-
+    @users = filtered_users
     @pagy, commits = pagy(filtered_commits)
     @commits = commits.to_a
     @session_votes_by_commit_id = session_votes_by_commit_id(@commits)
   end
 
+  protected
+
+  def current_scope
+    params[:scope] if Commit::SCOPES.include?(params[:scope])
+  end
+  helper_method :current_scope
+
   private
 
+  def filtered_users
+    return if batch.nil?
+
+    User.joins(:commits).where(batch: batch).by_name.distinct
+  end
+
   def filtered_commits
-    commits = Commit.includes(:user).public_send(scope, session.id)
+    commits = Commit.includes(:user).public_send(current_scope, *scope_arguments)
     commits = commits.where(user: { batch: batch }) if batch
 
     if params[:username].present?
@@ -30,8 +40,17 @@ class CommitsController < ApplicationController
     end
   end
 
-  def scope
-    params[:scope] if Commit::SCOPES.include?(params[:scope])
+  # Returns nil when the batch param is set to an empty string (all batches).
+  def batch
+    if @batches.include?(params[:batch])
+      params[:batch]
+    elsif params[:batch].nil?
+      @batches.first
+    end
+  end
+
+  def scope_arguments
+    [session.id] if scope == "voted"
   end
 
   # Returns nil when the batch param is set to an empty string (all batches).
