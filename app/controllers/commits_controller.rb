@@ -15,22 +15,24 @@ class CommitsController < ApplicationController
   end
   helper_method :current_scope
 
-  def current_batch
+  def current_batch_code
     params[:batch] if @batches.include?(params[:batch])
   end
-  helper_method :current_batch
+  helper_method :current_batch_code
 
   private
 
   def filtered_users
-    return if current_batch.nil?
+    return if current_batch_code.nil?
 
-    User.joins(:commits).where(batch: current_batch).by_name.distinct
+    User.joins(:commits).where(batch: current_batch_code).by_name.distinct
   end
 
   def filtered_commits
     commits = Commit.includes(:user).public_send(current_scope, *scope_arguments)
-    commits = commits.where(user: { batch: current_batch }) if current_batch
+    if current_batch_code
+      commits = commits.where(user: { batch: current_batch_code })
+    end
 
     if params[:username].present?
       commits = commits.where(user: { github_username: params[:username] })
