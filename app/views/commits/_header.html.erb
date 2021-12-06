@@ -13,7 +13,7 @@
             :batch,
             @batches.map { |b| ["Batch ##{b}", b] },
             {
-              selected: params[:batch],
+              selected: current_batch_code,
               include_blank: "All batches",
             },
             data: { action: "change->commits-filter#changeBatch" },
@@ -47,7 +47,7 @@
             scope,
             scopes_path(
               scope,
-              batch: params[:batch],
+              batch: current_batch_code,
               username: params[:username],
             ),
             class: ('selected' if current_scope == scope),

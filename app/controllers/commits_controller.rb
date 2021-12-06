@@ -15,17 +15,24 @@ class CommitsController < ApplicationController
   end
   helper_method :current_scope
 
+  def current_batch_code
+    params[:batch] if @batches.include?(params[:batch])
+  end
+  helper_method :current_batch_code
+
   private
 
   def filtered_users
-    return if batch.nil?
+    return if current_batch_code.nil?
 
-    User.joins(:commits).where(batch: batch).by_name.distinct
+    User.joins(:commits).where(batch: current_batch_code).by_name.distinct
   end
 
   def filtered_commits
     commits = Commit.includes(:user).public_send(current_scope, *scope_arguments)
-    commits = commits.where(user: { batch: batch }) if batch
+    if current_batch_code
+      commits = commits.where(user: { batch: current_batch_code })
+    end
 
     if params[:username].present?
       commits = commits.where(user: { github_username: params[:username] })
@@ -40,25 +47,7 @@ class CommitsController < ApplicationController
     end
   end
 
-  # Returns nil when the batch param is set to an empty string (all batches).
-  def batch
-    if @batches.include?(params[:batch])
-      params[:batch]
-    elsif params[:batch].nil?
-      @batches.first
-    end
-  end
-
   def scope_arguments
-    [session.id] if scope == "voted"
-  end
-
-  # Returns nil when the batch param is set to an empty string (all batches).
-  def batch
-    if @batches.include?(params[:batch])
-      params[:batch]
-    elsif params[:batch].nil?
-      @batches.first
-    end
+    [session.id] if current_scope == "voted"
   end
 end
