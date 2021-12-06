@@ -5,7 +5,7 @@
         form_with(
           url: scopes_path(Commit::SCOPES.first),
           method: :get,
-          data: { controller: "submit-form" }
+          data: { controller: "commits-filter", commits_filter_target: "form" },
         ) do |f|
       %>
         <%=
@@ -14,21 +14,27 @@
             @batches.map { |b| ["Batch ##{b}", b] },
             {
               selected: params[:batch],
+              include_blank: "All batches",
             },
-            data: { action: "change->submit-form#submit" },
+            data: { action: "change->commits-filter#changeBatch" },
           )
         %>
-        <%=
-          f.select(
-            :username,
-            @users.map { |u| [u.full_name, u.github_username] },
-            {
-              selected: params[:username],
-              include_blank: "All alumni",
-            },
-            data: { action: "change->submit-form#submit" },
-          )
-        %>
+        <% if @users %>
+          <%=
+            f.select(
+              :username,
+              @users.map { |u| [u.full_name, u.github_username] },
+              {
+                selected: params[:username],
+                include_blank: "All alumni",
+              },
+              data: {
+                commits_filter_target: "username",
+                action: "change->commits-filter#changeUsername",
+              },
+            )
+          %>
+        <% end %>
         <noscript>
           <%= submit_tag "Search", class: "btn btn-primary" %>
         </noscript>
@@ -39,8 +45,12 @@
         <%=
           link_to(
             scope,
-            scopes_path(scope, batch: params[:batch], username: params[:username]),
-            class: ('selected' if params[:scope] == scope)
+            scopes_path(
+              scope,
+              batch: params[:batch],
+              username: params[:username],
+            ),
+            class: ('selected' if current_scope == scope),
           )
         %>
       <% end %>
@@ -51,7 +61,9 @@
   </div>
 
   <h1 class="commits-count">
-    <span data-annotate-target="highlight"><%= @pagy.count %></span>
+    <span data-annotate-target="highlight">
+      <%= number_with_delimiter @pagy.count %>
+    </span>
     <%= "commit".pluralize(@pagy.count) %>
   </h1>
 </div>

@@ -19,5 +19,15 @@
     </ul>
   </div>
 
-  <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
+  <% if current_scope == "random" %>
+    <nav class="pagy-bootstrap-nav">
+      <ul class="pagination">
+        <li class="page-item">
+          <%= link_to "More", scopes_path("random"), class: "page-link" %>
+        </li>
+      </ul>
+    </nav>
+  <% else %>
+    <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
+  <% end %>
 </div>
