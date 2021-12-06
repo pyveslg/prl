@@ -121,10 +121,6 @@ GEM
       sassc (>= 1.11)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    graphql (1.13.0)
-    graphql-client (0.17.0)
-      activesupport (>= 3.0)
-      graphql (~> 1.10)
     hashie (5.0.0)
     hotwire-rails (0.1.3)
       rails (>= 6.0.0)
@@ -315,7 +311,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   font-awesome-sass
-  graphql-client
   hotwire-rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
