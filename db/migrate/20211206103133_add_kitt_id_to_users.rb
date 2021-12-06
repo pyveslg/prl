@@ -16,9 +16,11 @@ class AddKittIdToUsers < ActiveRecord::Migration[6.1]
       response["users"].each do |user|
         user_info = user["alumnus"]
         users = User.where(github_username: user_info["github"])
-        users = User.where(first_name: user_info["first_name"], last_name: user_info["last_name"]) unless users.any?
-        users.first.update(kitt_id: user_info["id"]) if users.any?
-        p "#{users.first.first_name} #{users.first.last_name} updated!" if users.any?
+        next if users.any?
+
+        user = User.find_by(first_name: user_info["first_name"], last_name: user_info["last_name"])
+        user.update!(kitt_id: user_info["id"]) if user
+        puts "#{user.first_name} #{user.last_name} updated!" if user
       end
     end
   end
