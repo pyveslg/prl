@@ -2,20 +2,25 @@ class Github::Api
   def each_commit(username, repository, cursor = nil, &block)
     variables = { username: username, repository: repository, cursor: cursor }
     data = query(COMMITS_BY_REPOSITORY_QUERY, variables: variables)
+
     edges = data.dig(
-      "repository",
-      "defaultBranchRef",
-      "target",
-      "history",
-      "edges",
+      :data,
+      :repository,
+      :defaultBranchRef,
+      :target,
+      :history,
+      :edges,
     )
     return if !edges || edges.count == 0
 
-    edges.each { |edge| block.call(edge["node"]) }
+    edges.each { |edge| block.call(edge[:node]) }
 
-    each_commit(username, repository, edges.last["cursor"], &block)
+    each_commit(username, repository, edges.last[:cursor], &block)
 
     sleep 3
+  end
+
+  class Error < RuntimeError
   end
 
   private
@@ -57,10 +62,13 @@ class Github::Api
     RestClient.post(
       GRAPHQL_URL,
       { query: query, variables: variables }.to_json,
-      "Authorization" => "Bearer #{ENV["GITHUB_TOKEN"]}",
-      "Content-Type" => "application/json"
+      Authorization: "Bearer #{ENV["GITHUB_ACCESS_TOKEN"]}",
     ) do |response, _request, _result|
-      JSON.parse(response.body, symbolize_names: true)
+      json = JSON.parse(response, symbolize_names: true)
+
+      raise Error, json[:message] if json[:message]
+
+      json
     end
   end
 end
