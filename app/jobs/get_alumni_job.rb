@@ -10,7 +10,7 @@ class GetAlumniJob < ApplicationJob
 
     response["users"].each do |user|
       user_info = user["alumnus"]
-      users = User.where(github_username: user_info["github"])
+      users = User.where(kitt_id: user_info["id"])
       next if users.any?
 
       user = users.create!(
