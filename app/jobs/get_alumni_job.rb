@@ -5,7 +5,7 @@ class GetAlumniJob < ApplicationJob
     url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}"
     cookie = ENV.fetch("COOKIE")
 
-    response = RestClient.get(url, headers = { cookie: cookie })
+    response = RestClient.get(url, cookie: cookie)
     response = JSON.parse(response.body)
 
     response["users"].each do |user|

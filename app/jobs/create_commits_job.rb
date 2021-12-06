@@ -2,10 +2,8 @@ class CreateCommitsJob < ApplicationJob
   queue_as :default
 
   def perform(repository)
-    GithubApi::Discovery.each_commit(
-      repository.github_username,
-      repository.name
-    ) do |commit|
+    api = Github::Api.new
+    api.each_commit(repository.github_username, repository.name) do |commit|
       next if commit.dig("committer", "email") == "noreply@github.com"
 
       hash = commit["id"]
