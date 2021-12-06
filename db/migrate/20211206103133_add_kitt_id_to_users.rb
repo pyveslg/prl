@@ -1,4 +1,7 @@
 class AddKittIdToUsers < ActiveRecord::Migration[6.1]
+  class User < ActiveRecord::Base
+  end
+
   def change
     add_column :users, :kitt_id, :integer
     batches = User.all.map{|x| x.batch}.uniq
