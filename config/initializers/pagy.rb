@@ -1,3 +1,3 @@
 require "pagy/extras/bootstrap"
 
-Pagy::VARS[:items] = 100
+Pagy::DEFAULT[:items] = 100
