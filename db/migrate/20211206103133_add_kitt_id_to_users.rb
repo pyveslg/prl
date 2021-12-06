@@ -4,7 +4,8 @@ class AddKittIdToUsers < ActiveRecord::Migration[6.1]
 
   def change
     add_column :users, :kitt_id, :integer
-    batches = User.all.map{|x| x.batch}.uniq
+
+    batches = User.distinct.pluck(:batch)
     cookie = ENV.fetch("COOKIE")
     batches.each do |batch|
       url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}"
