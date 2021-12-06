@@ -21,6 +21,7 @@ class GetAlumniJob < ApplicationJob
           password: "123456",
           first_name: user_info["first_name"],
           last_name: user_info["last_name"],
+          github_username: user_info["github"],
           batch: batch,
           photo_url: "https://kitt.lewagon.com/placeholder/users/#{user_info["github"]}"
         )
