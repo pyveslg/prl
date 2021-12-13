@@ -48,6 +48,6 @@ class CommitsController < ApplicationController
   end
 
   def scope_arguments
-    [session.id] if current_scope == "voted"
+    [session.id.to_s] if current_scope == "voted"
   end
 end
