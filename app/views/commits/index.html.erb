@@ -23,7 +23,17 @@
     <nav class="pagy-bootstrap-nav">
       <ul class="pagination">
         <li class="page-item">
-          <%= link_to "More", scopes_path("random"), class: "page-link" %>
+          <%=
+            link_to(
+              "More",
+              scopes_path(
+                "random",
+                batch: current_batch_code,
+                username: params[:username],
+              ),
+              class: "page-link",
+            )
+          %>
         </li>
       </ul>
     </nav>
