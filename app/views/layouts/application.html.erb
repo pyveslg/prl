@@ -12,7 +12,10 @@
     <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload', defer: true %>
   </head>
 
-  <body class="no-x-scrollable <%= params[:controller]%>-<%= params[:action] %>" data-controller="popover annotate">
+  <body
+    class="no-x-scrollable <%= params[:controller]%>-<%= params[:action] %>"
+    data-controller="popover"
+  >
     <%= render "shared/background-icons" %>
     <%= yield %>
     <% if current_user %>
