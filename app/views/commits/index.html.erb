@@ -4,19 +4,21 @@
   <div class="scrollable-y custom-scrollbar custom-primary-scrollbar">
     <%= turbo_stream_from "scores" %>
 
-    <ul class="commit-listing mt-3">
-      <% @commits.each do |commit| %>
-        <%=
-          render(
-            partial: "commits/commit",
-            locals: {
-              commit: commit,
-              vote: @session_votes_by_commit_id[commit.id],
-            }
-          )
-        %>
-      <% end %>
-    </ul>
+    <turbo-frame id="commits">
+      <ul class="commit-listing mt-3">
+        <% @commits.each do |commit| %>
+          <%=
+            render(
+              partial: "commits/commit",
+              locals: {
+                commit: commit,
+                vote: @session_votes_by_commit_id[commit.id],
+              }
+            )
+          %>
+        <% end %>
+      </ul>
+    </turbo-frame>
   </div>
 
   <% if current_scope == "random" %>
@@ -32,6 +34,7 @@
                 username: params[:username],
               ),
               class: "page-link",
+              "data-turbo-frame": "commits",
             )
           %>
         </li>
