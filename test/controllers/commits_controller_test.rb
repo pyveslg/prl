@@ -1,7 +1,9 @@
 require "test_helper"
 
-class CommitsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+class CommitsControllerTest < ActionController::TestCase
+  test "/voted succeeds" do
+    get :index, params: { scope: "voted" }
+
+    assert_response :success
+  end
 end
