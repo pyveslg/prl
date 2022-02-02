@@ -17,6 +17,8 @@ class CleanUselessCommitsJobTest < ActiveJob::TestCase
       message: "Merge branch origin/master",
     )
 
+    CleanUselessCommitsJob.perform_now
+
     assert_equal Commit.all, [commit_1]
   end
 end
