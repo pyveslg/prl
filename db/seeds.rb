@@ -36,6 +36,18 @@ repositories_by_batch = {
     https://github.com/OrnellaBis/Surf_Go
     https://github.com/ricawdo/air_cut
   ],
+  730 => %w[
+    https://github.com/JadeCathleen/my-batch-cooker
+    https://github.com/sophieguiller/secret-alien
+    https://github.com/Arti2666/Shotgunz
+    https://github.com/VictorChomette/sports_connect
+    https://github.com/kevinkotcherga/VIBES
+    https://github.com/sixtine-c/perfect_watch
+    https://github.com/infotestmax/memory-squared
+    https://github.com/RaniaB16/DRUNKED
+    https://github.com/Frizilborld/uniqueness
+    https://github.com/Tompagpag/Family_schedule
+  ],
   731 => %w[
     https://github.com/Delphine-cph/tocare
     https://github.com/steppan26/myra
