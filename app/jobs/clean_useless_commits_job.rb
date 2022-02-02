@@ -2,6 +2,8 @@ class CleanUselessCommitsJob < ApplicationJob
   queue_as :default
 
   def perform
-    Commit.where("message ILIKE 'Merge branch%'").destroy_all
+    Commit
+      .where(Commit.arel_table[:message].matches("Merge branch%"))
+      .destroy_all
   end
 end
