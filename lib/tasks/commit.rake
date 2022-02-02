@@ -4,7 +4,7 @@ namespace :commit do
     CleanOldCommitsJob.perform_now
   end
 
-  desc "Delete useless commits (automatic...)"
+  desc "Delete useless commits (merges…)"
   task delete_useless: :environment do
     CleanUselessCommitsJob.perform_now
   end
