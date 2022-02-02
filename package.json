@@ -2,7 +2,7 @@
   "name": "prl",
   "private": true,
   "dependencies": {
-    "@hotwired/turbo-rails": "^7.0.0-beta.5",
+    "@hotwired/turbo-rails": "^7.1.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -12,7 +12,6 @@
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "rails-ujs": "^5.2.4-5",
-    "rough-notation": "^0.5.1",
     "stimulus": "^2.0.0",
     "tippy.js": "^6.3.1"
   },

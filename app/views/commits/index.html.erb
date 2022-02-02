@@ -4,26 +4,39 @@
   <div class="scrollable-y custom-scrollbar custom-primary-scrollbar">
     <%= turbo_stream_from "scores" %>
 
-    <ul class="commit-listing mt-3">
-      <% @commits.each do |commit| %>
-        <%=
-          render(
-            partial: "commits/commit",
-            locals: {
-              commit: commit,
-              vote: @session_votes_by_commit_id[commit.id],
-            }
-          )
-        %>
-      <% end %>
-    </ul>
+    <turbo-frame id="commits">
+      <ul class="commit-listing mt-3">
+        <% @commits.each do |commit| %>
+          <%=
+            render(
+              partial: "commits/commit",
+              locals: {
+                commit: commit,
+                vote: @session_votes_by_commit_id[commit.id],
+              }
+            )
+          %>
+        <% end %>
+      </ul>
+    </turbo-frame>
   </div>
 
   <% if current_scope == "random" %>
     <nav class="pagy-bootstrap-nav">
       <ul class="pagination">
         <li class="page-item">
-          <%= link_to "More", scopes_path("random"), class: "page-link" %>
+          <%=
+            link_to(
+              "More",
+              scopes_path(
+                "random",
+                batch: current_batch_code,
+                username: params[:username],
+              ),
+              class: "page-link",
+              "data-turbo-frame": "commits",
+            )
+          %>
         </li>
       </ul>
     </nav>
