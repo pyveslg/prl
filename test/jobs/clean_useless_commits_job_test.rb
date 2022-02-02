@@ -1,7 +1,22 @@
 require "test_helper"
 
 class CleanUselessCommitsJobTest < ActiveJob::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "#perform" do
+    repository = Repository.create!(name: "test", github_username: "test")
+    user = User.create!
+
+    commit_1 = Commit.create!(
+      repository: repository,
+      user: user,
+      message: "Ok",
+    )
+
+    commit_2 = Commit.create!(
+      repository: repository,
+      user: user,
+      message: "Merge branch origin/master",
+    )
+
+    assert_equal Commit.all, [commit_1]
+  end
 end
