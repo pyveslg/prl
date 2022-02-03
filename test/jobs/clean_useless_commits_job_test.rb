@@ -8,13 +8,25 @@ class CleanUselessCommitsJobTest < ActiveJob::TestCase
     commit_1 = Commit.create!(
       repository: repository,
       user: user,
-      message: "Ok",
+      message: "Navbar is working!",
     )
 
     commit_2 = Commit.create!(
       repository: repository,
       user: user,
       message: "Merge branch origin/master",
+    )
+
+    commit_3 = Commit.create!(
+      repository: repository,
+      user: user,
+      message: "Ok",
+    )
+
+    commit_4 = Commit.create!(
+      repository: repository,
+      user: user,
+      message: "merge master",
     )
 
     CleanUselessCommitsJob.perform_now
