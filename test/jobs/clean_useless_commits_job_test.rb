@@ -29,6 +29,12 @@ class CleanUselessCommitsJobTest < ActiveJob::TestCase
       message: "merge master",
     )
 
+    commit_5 = Commit.create!(
+      repository: repository,
+      user: user,
+      message: "MERGE MASTER",
+    )
+
     CleanUselessCommitsJob.perform_now
 
     assert_equal Commit.all, [commit_1]
