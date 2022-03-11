@@ -17,6 +17,7 @@ class CleanUselessCommitsJob < ApplicationJob
       "merging",
       "test",
       "Initial commit with devise template from https://github.com/lewagon/rails-templates",
+      "Initial commit with minimal template from https://github.com/lewagon/rails-templates",
       "fixed",
       "changes",
       "update",

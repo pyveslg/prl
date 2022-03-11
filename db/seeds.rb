@@ -58,15 +58,28 @@ repositories_by_batch = {
   #   https://github.com/tdeganay/dcrypt
   #   https://github.com/JulienMalcouronne/FestivOut
   # ],
-  801 => %w[
-    https://github.com/Djoul75/MELOV
-    https://github.com/clementgateaud/whispers
-    https://github.com/nicolasollier/peertopair
-    https://github.com/ThierryFqn/contribute
-    https://github.com/caroline-dana/skilly
-    https://github.com/leobufi/elisee
-    https://github.com/rigardm/balmoral
+
+  800 => %w[
+    https://github.com/Pist4ch30/SplitHouse
+    https://github.com/Zizanie911/neatter
+    https://github.com/Maxplasse/foodclass
+    https://github.com/Mattfl22/GETYOSHARES
+    https://github.com/Arndau/rails-poner
+    https://github.com/K-Fabey/billr
+    https://github.com/max212118/wastrack
+    https://github.com/TomVsn/Momento-batch-800
+    https://github.com/anjacquemin/rails_explora_world
   ],
+
+  # 801 => %w[
+  #   https://github.com/Djoul75/MELOV
+  #   https://github.com/clementgateaud/whispers
+  #   https://github.com/nicolasollier/peertopair
+  #   https://github.com/ThierryFqn/contribute
+  #   https://github.com/caroline-dana/skilly
+  #   https://github.com/leobufi/elisee
+  #   https://github.com/rigardm/balmoral
+  # ],
 }
 
 repositories_by_batch.each do |batch, repositories|
