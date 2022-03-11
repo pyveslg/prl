@@ -25,7 +25,7 @@ Enfin, lancer `bin/setup`.
 
 ```sh
 $ git push heroku master
-$ heroku run rails db:migrate db:seed
+$ heroku run rails db:migrate db:seed commit:delete_useless
 ```
 
 ## Pour tester l'integration Omniauth
