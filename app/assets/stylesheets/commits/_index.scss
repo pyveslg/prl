@@ -38,6 +38,7 @@
     margin-bottom: 1rem;
     p {
       margin: 0;
+      word-break: break-word;
     }
     p:nth-child(2) {
       border-left: 1px solid #ddd;
