@@ -81,7 +81,8 @@ repositories_by_batch.keys.each do |b|
   GetAlumniJob.perform_now(b)
 end
 
-Repository.find_each do |r|
-  puts "------> Creating commits for #{r.full_name}…"
-  CreateCommitsJob.perform_now(r)
+repositories_by_batch.values.flatten.each do |repository_url|
+  repository = Repository.matching_github_url(repository_url).first
+  puts "------> Creating commits for #{repository.full_name}…"
+  CreateCommitsJob.perform_now(repository)
 end
