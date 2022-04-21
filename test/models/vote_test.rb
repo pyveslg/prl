@@ -1,7 +1,6 @@
 require "test_helper"
 
 class VoteTest < ActiveSupport::TestCase
-
   test "create_or_update_for_session_id creates an upvote" do
     user = User.create!(email: "acme@example.com", password: "acme@example.com")
     repository = Repository.create!(github_username: "acme", name: "acme")
