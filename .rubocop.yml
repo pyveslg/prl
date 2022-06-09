@@ -14,6 +14,10 @@ Style/ClassAndModuleChildren:
   Enabled: false
 Style/ConditionalAssignment:
   Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
 Style/StringLiterals:
   Enabled: false
 Style/RedundantReturn:
@@ -47,8 +51,6 @@ Style/FrozenStringLiteralComment:
 Layout/LineLength:
   Max: 120
 Style/EmptyMethod:
-  Enabled: false
-Style/TrailingCommaInArguments:
   Enabled: false
 Bundler/OrderedGems:
   Enabled: false
