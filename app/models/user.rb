@@ -13,14 +13,6 @@ class User < ApplicationRecord
     "#{first_name} #{short_last_name}".strip
   end
 
-  private
-
-  def short_last_name
-    return if last_name.blank?
-
-    "#{last_name[0]}."
-  end
-
   def self.from_omniauth(auth)
     user = where(github_username: auth.info.nickname).first_or_initialize
     user.update(
@@ -30,5 +22,13 @@ class User < ApplicationRecord
       password: Devise.friendly_token[0, 20]
     )
     user
+  end
+
+  private
+
+  def short_last_name
+    return if last_name.blank?
+
+    "#{last_name[0]}."
   end
 end

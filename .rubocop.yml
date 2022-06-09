@@ -10,6 +10,8 @@ AllCops:
     - 'tmp/**/*'
     - 'test/**/*'
 
+Style/ClassAndModuleChildren:
+  Enabled: false
 Style/ConditionalAssignment:
   Enabled: false
 Style/StringLiterals:
@@ -24,11 +26,19 @@ Metrics/AbcSize:
   Enabled: false
 Style/MutableConstant:
   Enabled: false
+Style/NumericPredicate:
+  Enabled: false
 Style/SignalException:
+  Enabled: false
+Style/StabbyLambdaParentheses:
+  Enabled: false
+Style/SymbolArray:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Enabled: false
 Style/MissingRespondToMissing:
+  Enabled: false
+Layout/SpaceInLambdaLiteral:
   Enabled: false
 Lint/MissingSuper:
   Enabled: false
@@ -37,6 +47,8 @@ Style/FrozenStringLiteralComment:
 Layout/LineLength:
   Max: 120
 Style/EmptyMethod:
+  Enabled: false
+Style/TrailingCommaInArguments:
   Enabled: false
 Bundler/OrderedGems:
   Enabled: false

@@ -62,7 +62,7 @@ class Github::Api
     RestClient.post(
       GRAPHQL_URL,
       { query: query, variables: variables }.to_json,
-      Authorization: "Bearer #{ENV["GITHUB_ACCESS_TOKEN"]}",
+      Authorization: "Bearer #{ENV.fetch('GITHUB_ACCESS_TOKEN')}",
     ) do |response, _request, _result|
       json = JSON.parse(response, symbolize_names: true)
 
