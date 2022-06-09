@@ -1,0 +1,12 @@
+.btn-prl,
+.form-container input.btn-prl {
+  background-color: white;
+  border: 1px solid $lewagon-red;
+  padding: 5px 15px;
+  color: $lewagon-red;
+  border-radius: 5px;
+  &:hover {
+    background-color: $lewagon-red;
+    color:white;
+  }
+}

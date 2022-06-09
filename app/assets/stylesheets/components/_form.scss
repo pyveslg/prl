@@ -1,0 +1,23 @@
+.form-container {
+  width: 600px;
+  margin: 200px auto;
+  h1 {
+    margin-bottom: 20px;
+    text-align:center;
+  }
+}
+
+.new_batch input, .new_batch textarea {
+  border-radius: 5px;
+  border: 1px solid rgba(160,160,160,0.7);
+  padding: 8px;
+  &:focus-visible {
+    border: 1px solid rgba(160,160,160,0.9);
+  }
+}
+
+.new_batch textarea {
+  width: 100%;
+  margin: 30px 0;
+  height: 320px;
+}
