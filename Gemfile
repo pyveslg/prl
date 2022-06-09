@@ -39,8 +39,12 @@ gem 'devise'
 gem 'omniauth-github', '~> 1.1'
 
 gem 'autoprefixer-rails'
-gem 'font-awesome-sass'
+
+# Icons
+gem 'font-awesome-sass', '~> 5.15'
+
 gem 'simple_form'
+
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
