@@ -19,7 +19,6 @@
     <%= render "shared/background-icons" %>
     <%= yield %>
     <% if current_user %>
-      <%#= link_to 'Commits', commits_path  %>
       <%= link_to 'Manage profile', profile_path %>
       <%= link_to 'Log out', destroy_user_session_path, method: :delete  %>
     <% end %>
