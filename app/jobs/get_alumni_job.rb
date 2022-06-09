@@ -2,32 +2,47 @@ class GetAlumniJob < ApplicationJob
   queue_as :default
 
   def perform(batch)
+    data = get_kitt_users(batch)
+    data[:users].each do |user|
+      info = user[:alumnus]
+      find_or_create_user(
+        batch: batch,
+        kitt_id: info[:id],
+        first_name: info[:first_name],
+        last_name: info[:last_name],
+        github: info[:github],
+      )
+    end
+  end
+
+  private
+
+  def get_kitt_users(batch)
     url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}"
-    cookie = ENV.fetch("COOKIE")
 
     response = RestClient.get(url, cookie: cookie)
-    response = JSON.parse(response.body)
+    JSON.parse(response.body, symbolize_names: true)
+  end
 
-    response["users"].each do |user|
-      user_info = user["alumnus"]
-      users = User.where(kitt_id: user_info["id"])
-      next if users.any?
+  def cookie
+    ENV.fetch("COOKIE")
+  end
 
-      if (unid_user = User.find_by(email: "lewagonstudent#{user_info['id']}@gmail.com"))
-        unid_user.update!(kitt_id: user_info["id"])
-      else
-        user = users.create!(
-          email: "lewagonstudent#{user_info['id']}@gmail.com",
-          password: "123456",
-          first_name: user_info["first_name"],
-          last_name: user_info["last_name"],
-          github_username: user_info["github"],
-          batch: batch,
-          photo_url: "https://kitt.lewagon.com/placeholder/users/#{user_info['github']}"
-        )
-      end
+  def find_or_create_user(batch:, kitt_id:, first_name:, last_name:, github:)
+    user = User.find_by(kitt_id: kitt_id)
+    return if user
 
-      puts "#{user.first_name} #{user.last_name} created"
-    end
+    user = User.find_by(email: "lewagonstudent#{kitt_id}@gmail.com")
+    return user.update!(kitt_id: kitt_id) if user
+
+    users.create!(
+      email: "lewagonstudent#{kitt_id}@gmail.com",
+      password: "123456",
+      first_name: first_name,
+      last_name: last_name,
+      github_username: github,
+      batch: batch,
+      photo_url: "https://kitt.lewagon.com/placeholder/users/#{github}"
+    )
   end
 end

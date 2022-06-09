@@ -29,7 +29,8 @@ class CommitsController < ApplicationController
   end
 
   def filtered_commits
-    commits = Commit.includes(:user).public_send(current_scope, *scope_arguments)
+    commits = Commit.includes(:user).public_send(current_scope, *scope_options)
+
     if current_batch_code
       commits = commits.where(user: { batch: current_batch_code })
     end
@@ -47,7 +48,7 @@ class CommitsController < ApplicationController
     end
   end
 
-  def scope_arguments
+  def scope_options
     [session.id.to_s] if current_scope == "voted"
   end
 end

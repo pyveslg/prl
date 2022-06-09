@@ -10,6 +10,8 @@ AllCops:
     - 'tmp/**/*'
     - 'test/**/*'
 
+Metrics/MethodLength:
+  Max: 15
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/ConditionalAssignment:
@@ -49,7 +51,7 @@ Lint/MissingSuper:
 Style/FrozenStringLiteralComment:
   Enabled: false
 Layout/LineLength:
-  Max: 120
+  Max: 80
 Style/EmptyMethod:
   Enabled: false
 Bundler/OrderedGems:
