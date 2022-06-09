@@ -59,17 +59,17 @@ repositories_by_batch = {
   #   https://github.com/JulienMalcouronne/FestivOut
   # ],
 
-  800 => %w[
-    https://github.com/Pist4ch30/SplitHouse
-    https://github.com/Zizanie911/neatter
-    https://github.com/Maxplasse/foodclass
-    https://github.com/Mattfl22/GETYOSHARES
-    https://github.com/Arndau/rails-poner
-    https://github.com/K-Fabey/billr
-    https://github.com/max212118/wastrack
-    https://github.com/TomVsn/Momento-batch-800
-    https://github.com/anjacquemin/rails_explora_world
-  ],
+  # 800 => %w[
+  #   https://github.com/Pist4ch30/SplitHouse
+  #   https://github.com/Zizanie911/neatter
+  #   https://github.com/Maxplasse/foodclass
+  #   https://github.com/Mattfl22/GETYOSHARES
+  #   https://github.com/Arndau/rails-poner
+  #   https://github.com/K-Fabey/billr
+  #   https://github.com/max212118/wastrack
+  #   https://github.com/TomVsn/Momento-batch-800
+  #   https://github.com/anjacquemin/rails_explora_world
+  # ],
 
   # 801 => %w[
   #   https://github.com/Djoul75/MELOV
@@ -80,6 +80,14 @@ repositories_by_batch = {
   #   https://github.com/leobufi/elisee
   #   https://github.com/rigardm/balmoral
   # ],
+  861 => %w[
+    https://github.com/Warhadzaaa/intermittent
+    https://github.com/batleclair/tomorrow-works
+    https://github.com/Charralle/FIT
+    https://github.com/Mamsoc/BeMyBest
+    https://github.com/atchee/RPUW
+    https://github.com/Newprotagonist/Gaming_Next
+  ],
 }
 
 repositories_by_batch.each do |batch, repositories|
