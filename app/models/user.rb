@@ -23,8 +23,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     user = where(github_username: auth.info.nickname).first
-    return unless user
-
+    user = User.new(github_username: auth.info.nickname) unless user
     user.update(
       email: auth.info.email,
       uid: auth.uid,
