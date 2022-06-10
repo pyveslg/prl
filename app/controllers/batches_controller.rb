@@ -4,7 +4,7 @@ class BatchesController < ApplicationController
   end
 
   def create
-    batch = Batch.new(batch_params.to_h.symbolize_keys)
+    batch = Batch.new(**batch_params.to_h.symbolize_keys)
     GetAlumniJob.perform_now(batch.number)
     batch.repository_urls.each do |url|
       repository = Repository.matching_github_url(url).first_or_create!(batch: batch.number)
