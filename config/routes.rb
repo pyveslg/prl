@@ -11,4 +11,8 @@ Rails.application.routes.draw do
     as: :scopes
 
   resources :votes, only: :create
+
+  authenticate :user, ->(user) { user.admin? } do
+    resources :batches, only: [:new, :create]
+  end
 end
