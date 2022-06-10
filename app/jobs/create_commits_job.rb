@@ -24,5 +24,6 @@ class CreateCommitsJob < ApplicationJob
         repository: repository,
       )
     end
+    CleanUselessCommitsJob.perform_later
   end
 end
