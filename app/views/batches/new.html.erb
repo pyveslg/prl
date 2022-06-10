@@ -2,8 +2,8 @@
   <h1>Add a batch</h1>
 
   <%= simple_form_for @batch do |f| %>
-    <%= f.input :number, as: :integer, label: false, placeholder: "Batch number?" %>
-    <%= f.input :repository_urls, as: :text, label: false, placeholder: "Repositories urls?" %>
+    <%= f.input :number, as: :integer, label: false, placeholder: "Batch number" %>
+    <%= f.input :repository_urls, as: :text, label: false, placeholder: "GitHub repository URLs.\nOne per line, e.g.:\nhttps://github.com/…/…" %>
     <div class="d-flex justify-content-center">
       <%= f.submit class: "btn-prl" %>
     </div>
