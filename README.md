@@ -1,6 +1,6 @@
 # Prl_
 
-Votez pour les meilleurs commits de votre batch.
+Votez pour les meilleurs commits de votre batch sur [wagonprl.com](https://www.wagonprl.com/).
 
 <a href="https://www.wagonprl.com/"><img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" width="250" /></a>
 
