@@ -5,7 +5,7 @@ class BatchesController < ApplicationController
 
   def create
     batch = Batch.new(**batch_params.to_h.symbolize_keys)
-    GetAlumniJob.perform_later(batch.number)
+    GetAlumniJob.perform_now(batch.number)
     batch.repository_urls.each_with_index do |url, index|
       sleep 1 unless index == 0
       repository = Repository.matching_github_url(url).first_or_create!(batch: batch.number)

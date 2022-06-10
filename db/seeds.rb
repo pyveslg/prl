@@ -99,11 +99,11 @@ end
 
 repositories_by_batch.keys.each do |b|
   puts "------> Creating alumni for batch #{b}…"
-  GetAlumniJob.perform_later(b)
+  GetAlumniJob.perform_now(b)
 end
 
 repositories_by_batch.values.flatten.each do |repository_url|
   repository = Repository.matching_github_url(repository_url).first
   puts "------> Creating commits for #{repository.full_name}…"
-  CreateCommitsJob.perform_later(repository)
+  CreateCommitsJob.perform_now(repository)
 end
