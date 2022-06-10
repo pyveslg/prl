@@ -9,7 +9,7 @@ class BatchesController < ApplicationController
     batch.repository_urls.each_with_index do |url, index|
       sleep 1 unless index == 0
       repository = Repository.matching_github_url(url).first_or_create!(batch: batch.number)
-      CreateCommitsJob.perform_now(repository)
+      CreateCommitsJob.perform_later(repository)
     end
     redirect_to scopes_path(:top, batch: batch.number)
   end
