@@ -24,5 +24,7 @@ class CreateCommitsJob < ApplicationJob
         repository: repository,
       )
     end
+
+    sleep 1
   end
 end
