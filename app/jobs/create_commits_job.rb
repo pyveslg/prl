@@ -30,8 +30,8 @@ class CreateCommitsJob < ApplicationJob
     Commit.create!(
       user: author,
       github_id: hash,
-      message: commit[:message].lines.first,
-      message_date: commit[:committedDate],
+      message: message,
+      message_date: date,
       repository: repository,
     )
 
