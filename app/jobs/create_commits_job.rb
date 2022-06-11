@@ -25,13 +25,17 @@ class CreateCommitsJob < ApplicationJob
     author = User.find_by(github_username: username)
     return if author.nil?
 
+    puts "#{repository.full_name}: <#{author_login}> #{message}"
+
     Commit.create!(
       user: author,
       github_id: hash,
-      message: message,
-      message_date: date,
+      message: commit[:message].lines.first,
+      message_date: commit[:committedDate],
       repository: repository,
     )
+
+    CleanUselessCommitsJob.perform_later
   end
   # rubocop:enable Metrics/ParameterLists
 end
