@@ -3,14 +3,7 @@ class Github::Api
     variables = { username: username, repository: repository, cursor: cursor }
     data = query(COMMITS_BY_REPOSITORY_QUERY, variables: variables)
 
-    edges = data.dig(
-      :data,
-      :repository,
-      :defaultBranchRef,
-      :target,
-      :history,
-      :edges,
-    )
+    edges = edges_from_data(data)
     return if !edges || edges.count == 0
 
     edges.each { |edge| block.call(edge[:node]) }
@@ -22,6 +15,17 @@ class Github::Api
   end
 
   private
+
+  def edges_from_data(data)
+    data.dig(
+      :data,
+      :repository,
+      :defaultBranchRef,
+      :target,
+      :history,
+      :edges,
+    )
+  end
 
   GRAPHQL_URL = "https://api.github.com/graphql"
 
@@ -60,7 +64,7 @@ class Github::Api
     RestClient.post(
       GRAPHQL_URL,
       { query: query, variables: variables }.to_json,
-      Authorization: "Bearer #{ENV["GITHUB_ACCESS_TOKEN"]}",
+      Authorization: "Bearer #{ENV.fetch('GITHUB_ACCESS_TOKEN')}",
     ) do |response, _request, _result|
       json = JSON.parse(response, symbolize_names: true)
 
