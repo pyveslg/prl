@@ -2,8 +2,7 @@ class GetAlumniJob < ApplicationJob
   queue_as :default
 
   def perform(batch)
-    data = get_kitt_users(batch)
-    data[:users].each do |user|
+    each_user(batch).each do |user|
       info = user[:alumnus]
       find_or_create_user(
         batch: batch,
@@ -17,8 +16,21 @@ class GetAlumniJob < ApplicationJob
 
   private
 
-  def get_kitt_users(batch)
-    url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}"
+  def each_user(batch)
+    page = 1
+    loop do
+      data = get_kitt_users(batch: batch, page: page)
+      data[:users].each do
+        yield user
+      end
+
+      break if !data[:has_more]
+      page += 1
+    end
+  end
+
+  def get_kitt_users(batch:, page:)
+    url = "https://kitt.lewagon.com/api/v1/users?search=#{batch}&page=#{page}"
 
     response = RestClient.get(url, cookie: cookie)
     JSON.parse(response.body, symbolize_names: true)
