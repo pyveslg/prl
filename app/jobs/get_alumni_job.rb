@@ -24,7 +24,8 @@ class GetAlumniJob < ApplicationJob
         yield user
       end
 
-      break if !data[:has_more]
+      break unless data[:has_more]
+
       page += 1
     end
   end
